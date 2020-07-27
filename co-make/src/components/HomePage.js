@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const { concerns } = useSelector((state) => state);
   useEffect(() => {
     dispatch(fetchConcerns());
   }, []);
@@ -11,6 +12,16 @@ const HomePage = () => {
   return (
     <div>
       <h1>HomePage</h1>
+      {concerns.map((concern) => {
+        console.log(concern);
+        return (
+          <div key={concern.id}>
+            <h2>{concern.title}</h2>
+            <p>{concern.description}</p>
+            <p>{concern.zip}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };
