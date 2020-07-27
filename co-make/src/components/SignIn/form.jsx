@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { registerSchema } from './schema';
 
+
 const Form = props => {
 
     const initialValues = {
@@ -56,21 +57,24 @@ const Form = props => {
 
     return(
         <form>
-           
-            <input
-                name="email"
-                type="email"
-                data-cy="input-email"
-                onChange={handleChange}
-                value={formValues.email}
-                />
-            <input
-                name="password"
-                type="password"
-                data-cy="input-password"
-                onChange={handleChange}
-                value={formValues.password}
-                />
+           <label>Email:&nbsp;
+                <input
+                    name="email"
+                    type="email"
+                    data-cy="input-email"
+                    onChange={handleChange}
+                    value={formValues.email}
+                    />
+            </label>
+            <label>Password:&nbsp;
+                <input
+                    name="password"
+                    type="password"
+                    data-cy="input-password"
+                    onChange={handleChange}
+                    value={formValues.password}
+                    />
+            </label>
             
             
             <button data-cy="submit-button" onClick={handleSubmit}>Submit</button>
