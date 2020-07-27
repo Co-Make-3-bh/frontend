@@ -4,9 +4,24 @@ function SignUp() {
     
     return (
         <div>
-            <label>Username&nbsp;
-                
+            <form>
+            <label>Username:&nbsp;
+                <input
+                type='text'
+                />
             </label>
+            <label>Username:&nbsp;
+                <input
+                type='text'
+                />
+            </label>
+            <label>Username:&nbsp;
+                <input
+                type='text'
+                />
+            </label>
+            
+            </form>
         </div>
     )
 }
