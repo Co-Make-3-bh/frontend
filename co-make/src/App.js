@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Form from './components/SignIn/form.jsx';
 import Users from './components/SignIn/users.jsx';
 import IssueForm from './components/PostIssue/issueForm.jsx';
+import Issues from './components/PostIssue/issues'
 import './App.css';
 import { Route, Switch, Link } from "react-router-dom";
 import HomePage from "./components/HomePage";
@@ -47,6 +48,7 @@ function App() {
       <Switch>
         <Route path = '/postissue'>
           <IssueForm setIssues={setIssues} issues={issues}/>
+          <Issues issues ={issues}/>
         </Route>
 
         <Route path = '/signin'>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { IssueSchema } from './issueSchema';
 
 
+
 const IssueForm = props => {
 
     const initialValues = {
@@ -35,7 +36,7 @@ const IssueForm = props => {
 
         IssueSchema.validate(formValues, {abortEarly: false})
         .then(_=> {
-            axios.post('https://comake-api.herokuapp.com/api/concerns',formValues)
+            axios.post('https://reqres.in/api/users',formValues)
             .then(res => {
                 if(errors.length > 0){
                     setErrors([]);
@@ -93,7 +94,7 @@ const IssueForm = props => {
                     value={formValues.createdBy}
                     />
             </label>
-            
+
             <label>Zip Code:&nbsp;
                 <input
                     name="zipCode"
@@ -113,6 +114,8 @@ const IssueForm = props => {
                 ))}
             </div>
         </form>
+              
+
         </div>
     )
 
