@@ -73,6 +73,7 @@ const IssueForm = props => {
                     value={formValues.title}
                     />
             </label>
+
             <label>Description:&nbsp;
                 <input
                     name="description"
@@ -82,6 +83,7 @@ const IssueForm = props => {
                     value={formValues.description}
                     />
             </label>
+
             <label>Created By:&nbsp;
                 <input
                     name="createdBy"
@@ -91,6 +93,7 @@ const IssueForm = props => {
                     value={formValues.createdBy}
                     />
             </label>
+            
             <label>Zip Code:&nbsp;
                 <input
                     name="zipCode"
