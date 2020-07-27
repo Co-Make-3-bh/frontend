@@ -6,7 +6,7 @@ import Issues from './components/PostIssue/issues'
 import './App.css';
 import { Route, Switch, Link } from "react-router-dom";
 import HomePage from "./components/HomePage";
-import SignUp from './components/SignUp'
+import SignUp from './components/SignUp/SignUp'
 import styled from 'styled-components'
 
 const StyledNav = styled.nav`
@@ -37,22 +37,22 @@ function App() {
         <StyledNav>
           <h1>Co-Make</h1>
           <div className='linkDiv'>
-            <Link className='link' to = '/postissue'>Post New Issue</Link>
-            <Link className='link' to = '/signin'>Sign In</Link>
+            <Link className='link' to='/postissue'>Post New Issue</Link>
+            <Link className='link' to='/signin'>Sign In</Link>
             <Link className='link' to='/signup'>Sign Up</Link>
             <Link className='link' to='/'>Home</Link>
           </div>
         </StyledNav>
       </header>
-      
+
       <Switch>
-        <Route path = '/postissue'>
-          <IssueForm setIssues={setIssues} issues={issues}/>
-          <Issues issues ={issues}/>
+        <Route path='/postissue'>
+          <IssueForm setIssues={setIssues} issues={issues} />
+          <Issues issues={issues} />
         </Route>
 
-        <Route path = '/signin'>
-          <Form setUsers={setUsers} users={users}/>
+        <Route path='/signin'>
+          <Form setUsers={setUsers} users={users} />
           <Users users={users} />
         </Route>
         <Route path='/signup'>
