@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { registerSchema } from "./schema";
+import { loginUser } from "../../store/actions";
 
 const Form = (props) => {
+  const { push } = useHistory();
+  const dispatch = useDispatch();
   const initialValues = {
     email: "",
     password: "",
@@ -29,22 +34,7 @@ const Form = (props) => {
     registerSchema
       .validate(formValues, { abortEarly: false })
       .then((_) => {
-        axios
-          .post("https://comake-api.herokuapp.com/api/auth/login", formValues)
-          .then((res) => {
-            if (errors.length > 0) {
-              setErrors([]);
-            }
-
-            console.log(res);
-
-            props.setUsers([...props.users, res.data]);
-
-            setFormValues(initialValues);
-          })
-          .catch((err) => {
-            console.dir(err);
-          });
+        dispatch(loginUser(formValues));
       })
       .catch((err) => {
         console.dir(err);

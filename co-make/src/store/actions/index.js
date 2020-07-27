@@ -55,6 +55,7 @@ export const fetchConcern = (createdBy, concernID) => (dispatch) => {
 
 export const loginUser = (credentials) => (dispatch) => {
   dispatch({ type: LOGIN_USER_START });
+  console.log(credentials);
   axiosWithAuth()
     .post("/auth/login", credentials)
     .then((res) => {
@@ -63,7 +64,7 @@ export const loginUser = (credentials) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({ type: LOGIN_USER_FAILURE });
-      console.log(err);
+      console.log(err.message);
     });
 };
 
