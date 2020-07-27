@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import Form from './components/SignIn/form';
-import Users from './components/SignIn/users';
-import logo from './logo.svg';
+import Form from './components/SignIn/form.jsx';
+import Users from './components/SignIn/users.jsx';
 import './App.css';
+import { Route, Switch } from "react-router-dom";
+import "./App.css";
+import HomePage from "./components/HomePage";
 
 function App() {
 
@@ -12,19 +14,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>App</h1>
+        <HomePage />
       </header>
+      <Switch>
+        <Route path="/home" component={HomePage} />
+      </Switch>
     </div>
   );
 }

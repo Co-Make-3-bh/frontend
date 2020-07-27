@@ -37,9 +37,53 @@ const Form = props => {
 
                 console.log(res);
 
+                props.setUsers([...props.users, res.data])
+
+                setFormValues(initialValues);
 
             })
+            .catch(err => {
+
+                console.dir(err);
+            });
         })
-    }
+        .catch(err => {
+            console.dir(err);
+
+            setErrors([...err.inner]);
+        })
+    };
+
+    return(
+        <form>
+           
+            <input
+                name="email"
+                type="email"
+                data-cy="input-email"
+                onChange={handleChange}
+                value={formValues.email}
+                />
+            <input
+                name="password"
+                type="password"
+                data-cy="input-password"
+                onChange={handleChange}
+                value={formValues.password}
+                />
+            
+            
+            <button data-cy="submit-button" onClick={handleSubmit}>Submit</button>
+            
+            <div data-cy="error-output">
+                {errors.map( err => (  
+                    <p style={{color: "red"}}>{err.message}</p>
+                ))}
+            </div>
+        </form>
+    )
 
 }
+
+
+export default Form

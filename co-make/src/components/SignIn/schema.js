@@ -9,7 +9,6 @@ export const registerSchema = yup.object().shape({
     password:
              yup
              .string()
-             .password()
              .required()
              .min(7),
     
