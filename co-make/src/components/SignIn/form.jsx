@@ -1,93 +1,92 @@
-import React, { useState } from 'react'
-import axios from 'axios';
-import { registerSchema } from './schema';
+import React, { useState } from "react";
+import axios from "axios";
+import { registerSchema } from "./schema";
 
+const Form = (props) => {
+  const initialValues = {
+    email: "",
+    password: "",
+  };
 
-const Form = props => {
+  const [formValues, setFormValues] = useState(initialValues);
 
-    const initialValues = {
-        email: "",
-        password: "",
-    }
+  const [errors, setErrors] = useState([]);
 
-    const [formValues, setFormValues] = useState(initialValues);
+  const handleChange = (e) => {
+    console.dir(e.target);
 
-    const [errors, setErrors] = useState([]);
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    });
 
-    const handleChange = e => {
+    console.log(formValues);
+  };
 
-        console.dir(e.target);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        setFormValues({
-            ...formValues, [e.target.name]: e.target.value
-        });
+    registerSchema
+      .validate(formValues, { abortEarly: false })
+      .then((_) => {
+        axios
+          .post("https://comake-api.herokuapp.com/api/auth/login", formValues)
+          .then((res) => {
+            if (errors.length > 0) {
+              setErrors([]);
+            }
 
-        console.log(formValues);
-    }
+            console.log(res);
 
-    const handleSubmit = e => {
-        e.preventDefault();
+            props.setUsers([...props.users, res.data]);
 
-        registerSchema.validate(formValues, {abortEarly: false})
-        .then(_=> {
-            axios.post('https://comake-api.herokuapp.com/api/auth/login',formValues)
-            .then(res => {
-                if(errors.length > 0){
-                    setErrors([]);
-                }
-
-                console.log(res);
-
-                props.setUsers([...props.users, res.data])
-
-                setFormValues(initialValues);
-
-            })
-            .catch(err => {
-
-                console.dir(err);
-            });
-        })
-        .catch(err => {
+            setFormValues(initialValues);
+          })
+          .catch((err) => {
             console.dir(err);
+          });
+      })
+      .catch((err) => {
+        console.dir(err);
 
-            setErrors([...err.inner]);
-        })
-    };
+        setErrors([...err.inner]);
+      });
+  };
 
-    return(
-        <form>
-           <label>Email:&nbsp;
-                <input
-                    name="email"
-                    type="email"
-                    data-cy="input-email"
-                    onChange={handleChange}
-                    value={formValues.email}
-                    />
-            </label>
-            <label>Password:&nbsp;
-                <input
-                    name="password"
-                    type="password"
-                    data-cy="input-password"
-                    onChange={handleChange}
-                    value={formValues.password}
-                    />
-            </label>
-            
-            
-            <button data-cy="submit-button" onClick={handleSubmit}>Submit</button>
-            
-            <div data-cy="error-output">
-                {errors.map( err => (  
-                    <p style={{color: "red"}}>{err.message}</p>
-                ))}
-            </div>
-        </form>
-    )
+  return (
+    <form>
+      <label>
+        Email:&nbsp;
+        <input
+          name="email"
+          type="email"
+          data-cy="input-email"
+          onChange={handleChange}
+          value={formValues.email}
+        />
+      </label>
+      <label>
+        Password:&nbsp;
+        <input
+          name="password"
+          type="password"
+          data-cy="input-password"
+          onChange={handleChange}
+          value={formValues.password}
+        />
+      </label>
 
-}
+      <button data-cy="submit-button" onClick={handleSubmit}>
+        Submit
+      </button>
 
+      <div data-cy="error-output">
+        {errors.map((err) => (
+          <p style={{ color: "red" }}>{err.message}</p>
+        ))}
+      </div>
+    </form>
+  );
+};
 
-export default Form
+export default Form;
