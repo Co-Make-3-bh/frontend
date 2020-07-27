@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Form from './components/SignIn/form.jsx';
 import Users from './components/SignIn/users.jsx';
+import IssueForm from './components/PostIssue/issueForm.jsx';
 import './App.css';
 import { Route, Switch, Link } from "react-router-dom";
 import HomePage from "./components/HomePage";
@@ -27,7 +28,7 @@ const StyledNav = styled.nav`
 function App() {
 
   const [users, setUsers] = useState([]);
-
+  const [issues, setIssues] = useState([]);
 
   return (
     <div className="App">
@@ -35,6 +36,7 @@ function App() {
         <StyledNav>
           <h1>Co-Make</h1>
           <div className='linkDiv'>
+            <Link className='link' to = '/postissue'>Post New Issue</Link>
             <Link className='link' to = '/signin'>Sign In</Link>
             <Link className='link' to='/signup'>Sign Up</Link>
             <Link className='link' to='/'>Home</Link>
@@ -43,6 +45,9 @@ function App() {
       </header>
       
       <Switch>
+        <Route path = '/postissue'>
+          <IssueForm setIssues={setIssues} issues={issues}/>
+        </Route>
 
         <Route path = '/signin'>
           <Form setUsers={setUsers} users={users}/>

@@ -22,7 +22,7 @@ const Form = props => {
             ...formValues, [e.target.name]: e.target.value
         });
 
-        console.log(formValues);
+       
     }
 
     const handleSubmit = e => {
@@ -56,6 +56,9 @@ const Form = props => {
     };
 
     return(
+        <div>
+
+        <h2>Sign In</h2>
         <form>
            <label>Email:&nbsp;
                 <input
@@ -85,6 +88,8 @@ const Form = props => {
                 ))}
             </div>
         </form>
+    
+        </div>
     )
 
 }
