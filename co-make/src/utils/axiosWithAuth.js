@@ -5,7 +5,7 @@ export const axiosWithAuth = () => {
   return axios.create({
     baseURL: "https://comake-api.herokuapp.com/api",
     headers: {
-      authorization: token,
+      Authorization: token,
     },
   });
 };
