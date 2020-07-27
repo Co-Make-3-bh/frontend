@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from 'react';
+import Form from './components/SignIn/form.jsx';
+import Users from './components/SignIn/users.jsx';
+import './App.css';
 import { Route, Switch, Link } from "react-router-dom";
-import "./App.css";
 import HomePage from "./components/HomePage";
 import SignUp from './components/SignUp'
 import styled from 'styled-components'
@@ -23,12 +25,17 @@ const StyledNav = styled.nav`
 `
 
 function App() {
+
+  const [users, setUsers] = useState([]);
+
+
   return (
     <div className="App">
       <header >
         <StyledNav>
           <h1>Co-Make</h1>
           <div className='linkDiv'>
+            <Link className='link' to = '/signin'>Sign In</Link>
             <Link className='link' to='/signup'>Sign Up</Link>
             <Link className='link' to='/'>Home</Link>
           </div>
@@ -36,6 +43,11 @@ function App() {
       </header>
       
       <Switch>
+
+        <Route path = '/signin'>
+          <Form setUsers={setUsers} users={users}/>
+          <Users users={users} />
+        </Route>
         <Route path='/signup'>
           <SignUp />
         </Route>
