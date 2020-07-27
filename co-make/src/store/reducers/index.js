@@ -9,6 +9,14 @@ export const initialState = {
   concerns: [],
   isFetching: "",
   error: "",
+  concern: {
+    id: "",
+    title: "",
+    description: "",
+    upvotes: "",
+    createdBy: "",
+    zip: "",
+  },
 };
 
 export const reducer = (state = initialState, action) => {
