@@ -36,7 +36,7 @@ const IssueForm = props => {
 
         IssueSchema.validate(formValues, {abortEarly: false})
         .then(_=> {
-            axios.post('https://reqres.in/api/users',formValues)
+            axios.post('https://comake-api.herokuapp.com/api/concerns',formValues)
             .then(res => {
                 if(errors.length > 0){
                     setErrors([]);
