@@ -6,6 +6,6 @@ export const IssueSchema = yup.object().shape({
     .string()
     .required("A description is required.")
     .min(20, "Description must be 20 characters or more."),
-  createdBy: yup.string().required("You must enter a name."),
-  zipCode: yup.string().required(" A zip code is required"),
+  // createdBy: yup.string().required("You must enter a name."),
+  zip: yup.string().required(" A zip code is required"),
 });
