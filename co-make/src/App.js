@@ -3,6 +3,7 @@ import Form from "./components/SignIn/form.jsx";
 import Users from "./components/SignIn/users.jsx";
 import IssueForm from "./components/PostIssue/issueForm.jsx";
 import Issues from "./components/PostIssue/issues";
+import Issue from "./components/PostIssue/issue";
 import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
@@ -75,6 +76,7 @@ function App() {
       </header>
 
       <Switch>
+        <Route path="/issue/:id" component={Issue} />
         <Route path="/postissue">
           <IssueForm setIssues={setIssues} issues={issues} />
           <Issues issues={issues} />

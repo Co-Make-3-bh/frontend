@@ -8,9 +8,7 @@ import {
   EDIT_CONCERN_START,
   EDIT_CONCERN_SUCCESS,
   EDIT_CONCERN_FAILURE,
-  DELETE_CONCERN_FAILURE,
-  DELETE_CONCERN_START,
-  DELETE_CONCERN_SUCCESS,
+  
 } from "../actions";
 
 export const initialState = {
@@ -20,6 +18,7 @@ export const initialState = {
   isEditing: false,
   isDeleting: false,
   error: "",
+  message: "",
   concern: {
     id: "",
     title: "",
@@ -44,7 +43,7 @@ const concernsReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditing: false,
-        concerns: state.concersns.map((concern) => {
+        concerns: state.concerns.map((concern) => {
           if (concern.id === action.payload.id) {
             return action.payload;
           }
@@ -53,6 +52,7 @@ const concernsReducer = (state = initialState, action) => {
       };
     case EDIT_CONCERN_FAILURE:
       return { ...state, isEditing: false, error: action.payload };
+
     default:
       return state;
   }

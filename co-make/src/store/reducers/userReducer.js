@@ -8,6 +8,15 @@ import {
   LOGOUT_USER_START,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_FAILURE,
+  USER_CONCERNS_START,
+  USER_CONCERNS_SUCCESS,
+  USER_CONCERNS_FAILURE,
+  ADD_CONCERN_START,
+  ADD_CONCERN_SUCCESS,
+  ADD_CONCERN_FAILURE,
+  DELETE_CONCERN_FAILURE,
+  DELETE_CONCERN_START,
+  DELETE_CONCERN_SUCCESS,
 } from "../actions";
 
 export const initialState = {
@@ -19,8 +28,11 @@ export const initialState = {
   },
   isLoggingIn: false,
   isRegistering: false,
+  isLoading: false,
+  isAdding: false,
   error: "",
   message: "",
+  usersConcerns: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -48,6 +60,44 @@ const userReducer = (state = initialState, action) => {
       };
     case LOGOUT_USER_FAILURE:
       return { ...state, isLoggingOut: false, error: action.payload };
+    case USER_CONCERNS_START:
+      return { ...state, isLoading: true, error: "", message: "" };
+    case USER_CONCERNS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        usersConcerns: action.payload,
+      };
+    case USER_CONCERNS_FAILURE:
+      return { ...state, isLoading: false, error: action.payload };
+    case ADD_CONCERN_START:
+      return { ...state, isAdding: true, error: "", message: "" };
+    case ADD_CONCERN_SUCCESS:
+      return {
+        ...state,
+        isAdding: false,
+        message: "Concern successfully added!",
+      };
+    case ADD_CONCERN_FAILURE:
+      return {
+        ...state,
+        isAdding: false,
+        error: action.payload,
+      };
+    case DELETE_CONCERN_START:
+      return { ...state, isDeleting: true, error: "", message: "" };
+    case DELETE_CONCERN_SUCCESS:
+      return {
+        ...state,
+        isDeleting: false,
+        // usersConcerns: state.usersConcerns.filter(concern => )
+      };
+    case DELETE_CONCERN_FAILURE:
+      return {
+        ...state,
+        isDeleting: false,
+        error: "Something went wrong. Please try again.",
+      };
     default:
       return state;
   }

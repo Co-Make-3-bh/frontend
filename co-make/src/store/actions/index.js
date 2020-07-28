@@ -147,7 +147,7 @@ export const deleteConcern = (id) => (dispatch) => {
   axiosWithAuth()
     .delete(`/concerns/${id}`)
     .then((res) => {
-      dispatch({ type: DELETE_CONCERN_SUCCESS });
+      dispatch({ type: DELETE_CONCERN_SUCCESS, payload: id });
       console.log(res);
     })
     .catch((err) => {
@@ -161,8 +161,8 @@ export const userConcerns = (userId) => (dispatch) => {
   axiosWithAuth()
     .get(`/concerns/createdBy/${userId}`)
     .then((res) => {
-      dispatch({ type: USER_CONCERNS_SUCCESS });
-      console.log(res);
+      dispatch({ type: USER_CONCERNS_SUCCESS, payload: res.data.data });
+      console.log(res.data.data);
     })
     .catch((err) => {
       dispatch({ type: USER_CONCERNS_FAILURE });
