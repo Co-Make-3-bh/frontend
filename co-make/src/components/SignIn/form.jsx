@@ -26,6 +26,11 @@ p{
 .link{
     text-decoration:none;
     color: white;
+
+    &:hover{
+        color: black;
+		    
+       }
 }
 
 .errors{
@@ -44,7 +49,7 @@ const StyledForm = styled.div`
     width: 25%;
     height:580px;
     padding:2%;
-    margin-top:5%;
+    margin-top:2%;
     border-radius:20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 

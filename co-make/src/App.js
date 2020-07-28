@@ -13,15 +13,30 @@ const StyledNav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: 'Quicksand', sans-serif;
   h1{
-    margin: 20px;
+    margin: 10px;
+    font-size:2.5rem;
+    font-family: 'Rock Salt', cursive;
+    width:20%
+    
   }
   .linkDiv{
-    margin: 20px;
+    margin: 10px;
+    width:30%;
     .link{
+      padding:2%;
       margin-left: 10px;
-      color: black;
+      color: white;
       text-decoration: none;
+      font-size:1.2rem;
+
+       &:hover{
+        color: black;
+		    
+       }
+      
+      
     } 
   }
 `

@@ -198,8 +198,9 @@ const IssueForm = (props) => {
       <StyledFormInput>
       <h2>Post an Issue</h2>
       
-        <label>
+        <label for ="title">
           Title:&nbsp;
+          </label>
           <input
             name="title"
             type="text"
@@ -207,10 +208,11 @@ const IssueForm = (props) => {
             onChange={handleChange}
             value={formValues.title}
           />
-        </label>
         
-        <label>
+        
+        <label for ="createdBy">
           Created By:&nbsp;
+          </label>
           <input
             name="createdBy"
             type="text"
@@ -218,10 +220,11 @@ const IssueForm = (props) => {
             onChange={handleChange}
             value={formValues.createdBy}
           />
-        </label>
+        
        
-        <label>
+        <label for ="zipCode">
           Zip Code:&nbsp;
+          </label>
           <input
             name="zipCode"
             type="text"
@@ -229,7 +232,7 @@ const IssueForm = (props) => {
             onChange={handleChange}
             value={formValues.zipCode}
           />
-        </label>
+       
 
         <label  for ="description"> 
           Description:&nbsp;
