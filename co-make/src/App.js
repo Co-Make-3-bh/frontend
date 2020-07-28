@@ -11,6 +11,7 @@ import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp/SignUp";
 import styled from "styled-components";
 
+
 const StyledNav = styled.nav`
   display: flex;
   align-items: center;
@@ -42,6 +43,8 @@ const StyledNav = styled.nav`
 function App() {
   const [users, setUsers] = useState([]);
   const [issues, setIssues] = useState([]);
+  
+  
 
   const { push } = useHistory();
   const handleSignOut = () => {
@@ -50,6 +53,7 @@ function App() {
     console.log(localStorage);
   };
   return (
+  
     <div className="App">
       <header>
         <StyledNav>
@@ -77,7 +81,10 @@ function App() {
       <Switch>
         <Route path="/postissue">
           <IssueForm setIssues={setIssues} issues={issues} />
-          <Issues issues={issues} />
+          <Issues issues={issues}  />
+       
+          
+          
         </Route>
         <Route path="/signup">
           <SignUp />
@@ -93,6 +100,7 @@ function App() {
         <PrivateRoute path="/profile" component={Profile} /> */}
       </Switch>
     </div>
+   
   );
 }
 
