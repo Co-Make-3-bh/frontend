@@ -140,10 +140,10 @@ export const deleteConcern = (id) => (dispatch) => {
     });
 };
 
-export const userConcerns = (id, userId) => (dispatch) => {
+export const userConcerns = (userId) => (dispatch) => {
   dispatch({ type: USER_CONCERNS_START });
   axiosWithAuth()
-    .get(`/concerns/${id}/${userId}`)
+    .get(`/concerns/createdBy/${userId}`)
     .then((res) => {
       dispatch({ type: USER_CONCERNS_SUCCESS });
       console.log(res);

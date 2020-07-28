@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 const HomePage = () => {
   const dispatch = useDispatch();
   const { concerns } = useSelector((state) => state.concernsReducer);
+  const { user } = useSelector((state) => state.userReducer);
   useEffect(() => {
     dispatch(fetchConcerns());
   }, []);
