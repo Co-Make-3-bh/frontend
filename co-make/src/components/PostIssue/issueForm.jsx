@@ -117,11 +117,14 @@ const IssueForm = (props) => {
   const { push } = useHistory();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userReducer);
+  const { isEditing } = useSelector((state) => state.concernsReducer);
+
+  console.log(isEditing);
 
   const initialValues = {
     title: "",
     description: "",
-    createdBy: user.id, //will be user.id when logged in
+    createdBy: user.id,
     zip: "",
   };
 

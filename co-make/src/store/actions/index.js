@@ -45,17 +45,18 @@ export const USER_CONCERNS_START = "USER_CONCERNS_START";
 export const USER_CONCERNS_SUCCESS = "USER_CONCERNS_SUCCESS";
 export const USER_CONCERNS_FAILURE = "USER_CONCERNS_FAILURE";
 
+//Set editing...
+export const SET_EDITING = "SET_EDITING";
+
 export const fetchConcerns = () => (dispatch) => {
   dispatch({ type: FETCH_CONCERNS_START });
   axiosWithAuth()
     .get("/concerns")
     .then((res) => {
       dispatch({ type: FETCH_CONCERNS_SUCCESS, payload: res.data.data });
-      console.log(res.data.data);
     })
     .catch((err) => {
       dispatch({ type: FETCH_CONCERNS_FAILURE, payload: err.message });
-      console.log(err);
     });
 };
 
@@ -65,11 +66,9 @@ export const fetchConcern = (createdBy, concernID) => (dispatch) => {
     .get(`/concerns/${createdBy}/${concernID}`)
     .then((res) => {
       dispatch({ type: FETCH_CONCERN_SUCCESS });
-      console.log(res);
     })
     .catch((err) => {
       dispatch({ type: FETCH_CONCERN_SUCCESS });
-      console.log(err);
     });
 };
 
@@ -81,11 +80,9 @@ export const loginUser = (credentials) => (dispatch) => {
     .then((res) => {
       dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data.data });
       localStorage.setItem("token", res.data.token);
-      console.log(res);
     })
     .catch((err) => {
       dispatch({ type: LOGIN_USER_FAILURE });
-      console.log(err.message);
     });
 };
 
@@ -105,26 +102,21 @@ export const registerUser = (user) => (dispatch) => {
     .then((res) => {
       dispatch({ type: REGISTER_USER_SUCCESS, payload: res.data.data });
       localStorage.setItem("token", res.data.token);
-      console.log(res.data.data);
     })
     .catch((err) => {
       dispatch({ type: REGISTER_USER_FAILURE });
-      console.log(err);
     });
 };
 
 export const addConcern = (concern) => (dispatch) => {
   dispatch({ type: ADD_CONCERN_START });
-  console.log(concern);
   axiosWithAuth()
     .post("/concerns", concern)
     .then((res) => {
       dispatch({ type: ADD_CONCERN_SUCCESS });
-      console.log(res);
     })
     .catch((err) => {
       dispatch({ type: ADD_CONCERN_FAILURE });
-      console.log(err);
     });
 };
 
@@ -133,8 +125,11 @@ export const editConcern = (concern, id) => (dispatch) => {
   axiosWithAuth()
     .put(`/concerns/${id}`, concern)
     .then((res) => {
-      dispatch({ type: EDIT_CONCERN_SUCCESS });
-      console.log(res);
+      dispatch({
+        type: EDIT_CONCERN_SUCCESS,
+        payload: JSON.parse(res.config.data),
+      });
+      console.log(JSON.parse(res.config.data));
     })
     .catch((err) => {
       dispatch({ type: EDIT_CONCERN_FAILURE });
@@ -148,11 +143,9 @@ export const deleteConcern = (id) => (dispatch) => {
     .delete(`/concerns/${id}`)
     .then((res) => {
       dispatch({ type: DELETE_CONCERN_SUCCESS, payload: id });
-      console.log(id);
     })
     .catch((err) => {
       dispatch({ type: DELETE_CONCERN_FAILURE });
-      console.log(err);
     });
 };
 
