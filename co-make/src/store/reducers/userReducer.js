@@ -17,6 +17,9 @@ import {
   DELETE_CONCERN_FAILURE,
   DELETE_CONCERN_START,
   DELETE_CONCERN_SUCCESS,
+  EDIT_CONCERN_START,
+  EDIT_CONCERN_SUCCESS,
+  EDIT_CONCERN_FAILURE,
 } from "../actions";
 
 export const initialState = {
@@ -30,6 +33,8 @@ export const initialState = {
   isRegistering: false,
   isLoading: false,
   isAdding: false,
+  isUpdating: false,
+  editing: false,
   error: "",
   message: "",
   usersConcerns: [],
@@ -90,7 +95,9 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isDeleting: false,
-        // usersConcerns: state.usersConcerns.filter(concern => )
+        usersConcerns: state.usersConcerns.filter(
+          (concern) => concern.id !== action.payload
+        ),
       };
     case DELETE_CONCERN_FAILURE:
       return {
@@ -98,6 +105,22 @@ const userReducer = (state = initialState, action) => {
         isDeleting: false,
         error: "Something went wrong. Please try again.",
       };
+    case EDIT_CONCERN_START:
+      return { ...state, isEditing: true, error: "" };
+    case EDIT_CONCERN_SUCCESS:
+      return {
+        ...state,
+        isEditing: false,
+        usersConcerns: state.usersConcerns.map((concern) => {
+          if (concern.id === action.payload.id) {
+            return action.payload;
+          }
+          return concern;
+        }),
+      };
+    case EDIT_CONCERN_FAILURE:
+      return { ...state, isEditing: false, error: action.payload };
+
     default:
       return state;
   }

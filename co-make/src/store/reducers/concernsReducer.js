@@ -5,10 +5,6 @@ import {
   FETCH_CONCERN_START,
   FETCH_CONCERN_FAILURE,
   FETCH_CONCERN_SUCCESS,
-  EDIT_CONCERN_START,
-  EDIT_CONCERN_SUCCESS,
-  EDIT_CONCERN_FAILURE,
-  
 } from "../actions";
 
 export const initialState = {
@@ -37,22 +33,6 @@ const concernsReducer = (state = initialState, action) => {
       return { ...state, isFetching: false, concerns: action.payload };
     case FETCH_CONCERNS_FAILURE:
       return { ...state, isFetching: false, error: action.payload };
-    case EDIT_CONCERN_START:
-      return { ...state, isEditing: true, error: "" };
-    case EDIT_CONCERN_SUCCESS:
-      return {
-        ...state,
-        isEditing: false,
-        concerns: state.concerns.map((concern) => {
-          if (concern.id === action.payload.id) {
-            return action.payload;
-          }
-          return concern;
-        }),
-      };
-    case EDIT_CONCERN_FAILURE:
-      return { ...state, isEditing: false, error: action.payload };
-
     default:
       return state;
   }
