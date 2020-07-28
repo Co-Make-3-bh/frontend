@@ -3,6 +3,52 @@ import signUpSchema from './signUpSchema'
 import * as yup from 'yup'
 import { registerUser } from "../../store/actions"
 import { useDispatch } from "react-redux"
+import styled from 'styled-components'
+
+const StyledForm = styled.form`
+    width: 25%;
+    height: 580px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 28px;
+    background-color: #E5EBED;
+    padding: 30px;
+    border-radius:20px;
+    font-family: 'Quicksand', sans-serif;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    div{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        
+    }
+    label{
+        text-align: left;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+    }
+    input{
+        margin-bottom: 10px;
+        height: 40px;
+        border: 1px solid lightgrey;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+    h2{
+        text-align: left;
+        font-size: 2rem;
+    }
+    button{
+        height: 70px;
+        background-color: #2B85A2;
+        margin-top: 30px; 
+        font-size: 1.2rem;
+        color: white;
+        border: none;
+        border-radius: 4px; 
+    }
+`
 
 function SignUp() {
     const dispatch = useDispatch()
@@ -47,11 +93,10 @@ function SignUp() {
         setUserValues(initialFormValues)
     }
     return (
-        <div>
-
-
-            <form>
-                <label>Username:&nbsp;
+            <StyledForm>
+                <div>
+                <h2>Sign Up</h2>
+                <label>Username:</label>
                 <input
                         type='text'
                         name='username'
@@ -60,8 +105,7 @@ function SignUp() {
                         required
                     />
                     {errors.username && <p>{errors.username}</p>}
-                </label>
-                <label>Email:&nbsp;
+                <label>Email:</label>
                 <input
                         type='email'
                         name='email'
@@ -70,8 +114,8 @@ function SignUp() {
                         required
                     />
                     {errors.email && <p>{errors.email}</p>}
-                </label>
-                <label>Password:&nbsp;
+                
+                <label>Password:</label>
                 <input
                         type='password'
                         name='password'
@@ -79,8 +123,8 @@ function SignUp() {
                         value={userValues.password}
                     />
                     {errors.password && <p>{errors.password}</p>}
-                </label>
-                <label>Zip:&nbsp;
+                
+                <label>Zip:</label>
                 <input
                         type='text'
                         name='zip'
@@ -89,10 +133,10 @@ function SignUp() {
 
                     />
                     {errors.zip && <p>{errors.zip}</p>}
-                </label>
+                
                 <button onClick={handleSubmit}>Sign Up</button>
-            </form>
-        </div>
+                </div>
+            </StyledForm>
     )
 }
 export default SignUp
