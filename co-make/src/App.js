@@ -3,11 +3,14 @@ import Form from './components/SignIn/form.jsx';
 import Users from './components/SignIn/users.jsx';
 import IssueForm from './components/PostIssue/issueForm.jsx';
 import Issues from './components/PostIssue/issues'
+
+
 import './App.css';
 import { Route, Switch, Link } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import SignUp from './components/SignUp/SignUp'
 import styled from 'styled-components'
+
 
 const StyledNav = styled.nav`
   display: flex;
@@ -45,8 +48,11 @@ function App() {
 
   const [users, setUsers] = useState([]);
   const [issues, setIssues] = useState([]);
+  
+  
 
   return (
+  
     <div className="App">
       <header >
         <StyledNav>
@@ -63,7 +69,10 @@ function App() {
       <Switch>
         <Route path='/postissue'>
           <IssueForm setIssues={setIssues} issues={issues} />
-          <Issues issues={issues} />
+          <Issues issues={issues}  />
+       
+          
+          
         </Route>
 
         <Route path='/signin'>
@@ -76,6 +85,7 @@ function App() {
         <Route path="/" component={HomePage} />
       </Switch>
     </div>
+   
   );
 }
 

@@ -7,6 +7,7 @@ const Issues = (props) => {
       {props.issues.map((issue) => (
         <Issue issue={issue} key={issue.id} />
       ))}
+
     </div>
   );
 };

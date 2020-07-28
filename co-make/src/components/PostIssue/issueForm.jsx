@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-
 import { IssueSchema } from "./issueSchema";
 import styled from "styled-components";
 import { addConcern } from "../../store/actions";
+import { CloudinaryContext,Image} from "cloudinary-react";
+import { fetchPhotos, openUploadWidget } from "./utils/CloudinaryService";
 
 const FormContainer = styled.div`
   display: flex;
@@ -49,6 +50,22 @@ const StyledForm = styled.div`
 
   form {
     width: 95%;
+    margin-bottom:5%;
+  }
+
+  button {
+    width: 95%;
+    background-color: #2b85a2;
+    color: white;
+    padding: 20px 20px;
+    margin: 2%;
+    margin-top: 8%;
+    margin-bottom: 2%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: "Quicksand", sans-serif;
   }
 `;
 
@@ -94,20 +111,7 @@ const StyledFormInput = styled.div`
     box-sizing: border-box;
   }
 
-  button {
-    width: 95%;
-    background-color: #2b85a2;
-    color: white;
-    padding: 20px 20px;
-    margin: 2%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-family: "Quicksand", sans-serif;
-  }
+  
 `;
 
 const IssueForm = (props) => {
@@ -121,6 +125,7 @@ const IssueForm = (props) => {
 
   const [formValues, setFormValues] = useState(initialValues);
   const [errors, setErrors] = useState([]);
+  const [images, setImages] = useState([]);
 
   const handleChange = (e) => {
     console.dir(e.target);
@@ -141,9 +146,39 @@ const IssueForm = (props) => {
         setErrors([...err.inner]);
       });
     setFormValues(initialValues);
+    
   };
 
+
+  const beginUpload = tag => {
+    const uploadOptions = {
+      cloudName: "co-make-test",
+      tags: [tag],
+      uploadPreset: "upload"
+    };
+  
+    openUploadWidget(uploadOptions, (error, photos) => {
+      if (!error) {
+        console.log(photos);
+        if(photos.event === 'success'){
+          setImages([...images, photos.info.public_id])
+        }
+      } else {
+        console.log(error);
+      }
+    })
+  }
+  useEffect( () => {
+    fetchPhotos("image", setImages);
+  }, [])
+
   return (
+    
+    <CloudinaryContext cloudName="co-make-test">
+      <section>
+        {images.map(i => <img src={i} alt="" />)}
+      </section>
+
     <FormContainer>
       <div className="error-output">
         {errors.map((err) => (
@@ -191,14 +226,27 @@ const IssueForm = (props) => {
               onChange={handleChange}
               value={formValues.description}
             />
-
-            <button data-cy="submit-button" onClick={handleSubmit}>
-              Post New Issue
-            </button>
+                
+               
+          
           </StyledFormInput>
         </form>
+        <section>
+            {images.map(i => <Image
+                  key={i}
+                  publicId={i}
+                  fetch-format="auto"
+                  quality="auto"
+                />)}
+        </section>
+
+        <button onClick={() => beginUpload()}>Upload Image</button>
+        <button data-cy="submit-button" onClick={handleSubmit}>
+              Post New Issue
+            </button>
       </StyledForm>
     </FormContainer>
+    </CloudinaryContext>
   );
 };
 
