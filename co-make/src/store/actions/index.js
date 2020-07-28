@@ -30,13 +30,23 @@ export const EDIT_CONCERN_START = "EDIT_CONCERN_START";
 export const EDIT_CONCERN_SUCCESS = "EDIT_CONCERN_SUCCESS";
 export const EDIT_CONCERN_FAILURE = "EDIT_CONCERN_FAILURE";
 
+//Delete concermn...
+export const DELETE_CONCERN_START = "DELETE_CONCERN_START";
+export const DELETE_CONCERN_SUCCESS = "DELETE_CONCERN_SUCCESS";
+export const DELETE_CONCERN_FAILURE = "DELETE_CONCERN_FAILURE";
+
+//User specific concerns...
+export const USER_CONCERNS_START = "USER_CONCERNS_START";
+export const USER_CONCERNS_SUCCESS = "USER_CONCERNS_SUCCESS";
+export const USER_CONCERNS_FAILURE = "USER_CONCERNS_FAILURE";
+
 export const fetchConcerns = () => (dispatch) => {
   dispatch({ type: FETCH_CONCERNS_START });
   axiosWithAuth()
     .get("/concerns")
     .then((res) => {
       dispatch({ type: FETCH_CONCERNS_SUCCESS, payload: res.data.data });
-      console.log(res);
+      console.log(res.data.data);
     })
     .catch((err) => {
       dispatch({ type: FETCH_CONCERNS_FAILURE, payload: err.message });
@@ -112,6 +122,34 @@ export const editConcern = (concern, id) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({ type: EDIT_CONCERN_FAILURE });
+      console.log(err);
+    });
+};
+
+export const deleteConcern = (id) => (dispatch) => {
+  dispatch({ type: DELETE_CONCERN_START });
+  axiosWithAuth()
+    .delete(`/concerns/${id}`)
+    .then((res) => {
+      dispatch({ type: DELETE_CONCERN_SUCCESS });
+      console.log(res);
+    })
+    .catch((err) => {
+      dispatch({ type: DELETE_CONCERN_FAILURE });
+      console.log(err);
+    });
+};
+
+export const userConcerns = (id, userId) => (dispatch) => {
+  dispatch({ type: USER_CONCERNS_START });
+  axiosWithAuth()
+    .get(`/concerns/${id}/${userId}`)
+    .then((res) => {
+      dispatch({ type: USER_CONCERNS_SUCCESS });
+      console.log(res);
+    })
+    .catch((err) => {
+      dispatch({ type: USER_CONCERNS_FAILURE });
       console.log(err);
     });
 };

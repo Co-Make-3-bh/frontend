@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Profile = () => {
-  useEffect(() => {axiosWithAuth().get()}, []);
+  useEffect(() => {}, []);
   return (
     <div>
       <h1>Profile</h1>

@@ -131,6 +131,7 @@ const Form = (props) => {
       .validate(formValues, { abortEarly: false })
       .then((_) => {
         dispatch(loginUser(formValues));
+        push("/");
       })
       .catch((err) => {
         console.dir(err);
