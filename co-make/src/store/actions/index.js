@@ -148,7 +148,7 @@ export const deleteConcern = (id) => (dispatch) => {
     .delete(`/concerns/${id}`)
     .then((res) => {
       dispatch({ type: DELETE_CONCERN_SUCCESS, payload: id });
-      console.log(res);
+      console.log(id);
     })
     .catch((err) => {
       dispatch({ type: DELETE_CONCERN_FAILURE });

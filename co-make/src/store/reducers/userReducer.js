@@ -90,7 +90,9 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isDeleting: false,
-        // usersConcerns: state.usersConcerns.filter(concern => )
+        usersConcerns: state.usersConcerns.filter(
+          (concern) => concern.id !== action.payload
+        ),
       };
     case DELETE_CONCERN_FAILURE:
       return {

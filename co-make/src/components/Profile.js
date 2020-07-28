@@ -14,15 +14,14 @@ const ListItem = styled.li`
 `;
 
 const Profile = () => {
-  
   const dispatch = useDispatch();
   const { user, usersConcerns } = useSelector((state) => state.userReducer);
   console.log(user);
-  console.log(usersConcerns);
+
   useEffect(() => {
     dispatch(userConcerns(user.id));
   }, []);
-
+  console.log(usersConcerns);
   return (
     <div>
       <h1>Profile</h1>
@@ -33,10 +32,9 @@ const Profile = () => {
           <List>
             {usersConcerns.map(
               (concern) => (
-                <ListItem>
+                <ListItem key={concern.id}>
                   <Link
                     to={{ pathname: `/issue/${concern.id}`, state: concern }}
-                    key={concern.id}
                   >
                     {concern.title}
                   </Link>
