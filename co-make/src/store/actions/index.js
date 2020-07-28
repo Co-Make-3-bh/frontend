@@ -25,6 +25,11 @@ export const FETCH_CONCERN_START = "FETCH_CONCERN_START";
 export const FETCH_CONCERN_SUCCESS = "FETCH_CONCERN_SUCCESS";
 export const FETCH_CONCERN_FAILURE = "FETCH_CONCERN_FAILURE";
 
+//Edit concern...
+export const EDIT_CONCERN_START = "EDIT_CONCERN_START";
+export const EDIT_CONCERN_SUCCESS = "EDIT_CONCERN_SUCCESS";
+export const EDIT_CONCERN_FAILURE = "EDIT_CONCERN_FAILURE";
+
 export const fetchConcerns = () => (dispatch) => {
   dispatch({ type: FETCH_CONCERNS_START });
   axiosWithAuth()
@@ -84,6 +89,7 @@ export const registerUser = (user) => (dispatch) => {
 
 export const addConcern = (concern) => (dispatch) => {
   dispatch({ type: ADD_CONCERN_START });
+  console.log(concern);
   axiosWithAuth()
     .post("/concerns", concern)
     .then((res) => {
@@ -92,6 +98,20 @@ export const addConcern = (concern) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({ type: ADD_CONCERN_FAILURE });
+      console.log(err);
+    });
+};
+
+export const editConcern = (concern, id) => (dispatch) => {
+  dispatch({ type: EDIT_CONCERN_START });
+  axiosWithAuth()
+    .put(`/concerns/${id}`, concern)
+    .then((res) => {
+      dispatch({ type: EDIT_CONCERN_SUCCESS });
+      console.log(res);
+    })
+    .catch((err) => {
+      dispatch({ type: EDIT_CONCERN_FAILURE });
       console.log(err);
     });
 };
