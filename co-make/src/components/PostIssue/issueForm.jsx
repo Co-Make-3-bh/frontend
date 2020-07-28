@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { IssueSchema } from "./issueSchema";
 import styled from "styled-components";
 import { addConcern } from "../../store/actions";
@@ -115,11 +116,14 @@ const StyledFormInput = styled.div`
 `;
 
 const IssueForm = (props) => {
+  const { push } = useHistory();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userReducer);
+  console.log(user);
   const initialValues = {
     title: "",
     description: "",
-    createdBy: 1, //will be user.id when logged in
+    createdBy: user.id, //will be user.id when logged in
     zip: "",
   };
 
