@@ -6,7 +6,7 @@ import Issues from "./components/PostIssue/issues";
 import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch, Link, useHistory } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp/SignUp";
 import styled from "styled-components";
@@ -43,6 +43,12 @@ function App() {
   const [users, setUsers] = useState([]);
   const [issues, setIssues] = useState([]);
 
+  const { push } = useHistory();
+  const handleSignOut = () => {
+    push("/");
+    localStorage.removeItem("token");
+    console.log(localStorage);
+  };
   return (
     <div className="App">
       <header>
@@ -60,6 +66,9 @@ function App() {
             </Link>
             <Link className="link" to="/home">
               Home
+            </Link>
+            <Link className="link" to="/" onClick={handleSignOut}>
+              Sign Out
             </Link>
           </div>
         </StyledNav>

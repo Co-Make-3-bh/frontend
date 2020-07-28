@@ -4,10 +4,10 @@ import { userConcerns } from "../store/actions";
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userReducer);
+  console.log(user);
 
-  useEffect(() => {
-    dispatch(userConcerns(0, 0));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div>

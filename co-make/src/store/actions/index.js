@@ -10,6 +10,11 @@ export const LOGIN_USER_START = "LOGIN_USER_START";
 export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
 
+//Logout user...
+export const LOGOUT_USER_START = "LOGOUT_USER_START";
+export const LOGOUT_USER_SUCCESS = "LOGOUT_USER_SUCCESS";
+export const LOGOUT_USER_FAILURE = "LOGOUT_USER_FAILURE";
+
 //Register user...
 export const REGISTER_USER_START = "REGISTER_USER_START";
 export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
@@ -74,7 +79,8 @@ export const loginUser = (credentials) => (dispatch) => {
   axiosWithAuth()
     .post("/auth/login", credentials)
     .then((res) => {
-      dispatch({ type: LOGIN_USER_SUCCESS });
+      dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data.data });
+      localStorage.setItem("token", res.data.token);
       console.log(res);
     })
     .catch((err) => {
@@ -83,13 +89,23 @@ export const loginUser = (credentials) => (dispatch) => {
     });
 };
 
+export const logoutUser = (dispatch) => {
+  dispatch({ type: LOGOUT_USER_START }).then().catch();
+  dispatch({ type: LOGOUT_USER_SUCCESS, payload: "Successfully logged out" });
+  dispatch({
+    type: LOGOUT_USER_FAILURE,
+    payload: "Something went wrong. Please try again.",
+  });
+};
+
 export const registerUser = (user) => (dispatch) => {
   dispatch({ type: REGISTER_USER_START });
   axiosWithAuth()
     .post("/auth/register", user)
     .then((res) => {
-      dispatch({ type: REGISTER_USER_SUCCESS });
-      console.log(res);
+      dispatch({ type: REGISTER_USER_SUCCESS, payload: res.data.data });
+      localStorage.setItem("token", res.data.token);
+      console.log(res.data.data);
     })
     .catch((err) => {
       dispatch({ type: REGISTER_USER_FAILURE });
