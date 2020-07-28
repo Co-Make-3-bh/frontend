@@ -1,9 +1,119 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { registerSchema } from "./schema";
 import { loginUser } from "../../store/actions";
+import styled from 'styled-components'
+
+
+const FormContainer = styled.div`
+display:flex;
+justify-content:center;
+flex-direction:column;
+align-items:center;
+width:100%;
+text-decoration:none;
+
+p{
+    color: #C6D7DD;
+    margin-top:2%;
+    font-size:1rem;
+    font-family: 'Quicksand', sans-serif;
+    
+}
+
+.link{
+    text-decoration:none;
+    color: white;
+}
+
+.errors{
+  font-size:1.5rem;
+  font-family: 'Quicksand', sans-serif;
+  
+    
+}
+    
+
+
+`
+const StyledForm = styled.div`
+
+    background-color: #E5EBED;
+    width: 25%;
+    height:580px;
+    padding:2%;
+    margin-top:5%;
+    border-radius:20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    display:flex;
+    flex-direction: column;
+    
+    align-items:center;
+ 
+    
+    
+    form{
+        width:95%;
+    }
+
+`
+
+
+
+const StyledFormInput = styled.div`
+    display:flex;
+    flex-direction: column;
+   
+    width:100%;
+   
+    h2{
+        text-align:left;
+        font-size:2rem;
+        margin-bottom:8%;
+        margin-top:10%;
+        font-family: 'Quicksand', sans-serif;
+    }
+
+    label{
+        width:95%;
+        text-align:left;
+        margin:2%;
+        font-size:1.2rem;
+        font-family: 'Quicksand', sans-serif;
+    }
+
+
+    input{
+        width: 95%;
+        padding: 20px 20px;
+        margin: 2%; 
+        margin-bottom:8%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        
+        
+    }
+
+    button{
+        width: 95%;
+        background-color: #2B85A2;
+        color: white;
+        padding: 20px 20px;
+        margin: 2%;
+        margin-top:10%;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size:1.2rem;
+        font-family: 'Quicksand', sans-serif;
+    }
+    
+
+`
 
 const Form = (props) => {
   const { push } = useHistory();
@@ -44,38 +154,54 @@ const Form = (props) => {
   };
 
   return (
+
+    <FormContainer>
+
+<div className="errors">
+        {errors.map((err) => (
+          <p style={{ color: "red" }}>{err.message}</p>
+        ))}
+      </div>
+
+    <StyledForm>
+  
     <form>
-      <label>
-        Email:&nbsp;
-        <input
+        <StyledFormInput>
+            <h2>Log In to Your Account</h2>
+      <label for ="email">
+      Email:&nbsp;</label>
+        <input id = "email"
           name="email"
           type="email"
           data-cy="input-email"
           onChange={handleChange}
           value={formValues.email}
         />
-      </label>
-      <label>
+      
+      <label for ="password">
         Password:&nbsp;
-        <input
+        </label>
+        <input id="password"
           name="password"
           type="password"
           data-cy="input-password"
           onChange={handleChange}
           value={formValues.password}
         />
-      </label>
+      
 
       <button data-cy="submit-button" onClick={handleSubmit}>
-        Submit
+        Login
       </button>
 
-      <div data-cy="error-output">
-        {errors.map((err) => (
-          <p style={{ color: "red" }}>{err.message}</p>
-        ))}
-      </div>
+      
+      </StyledFormInput>
     </form>
+    
+    </StyledForm>
+    <p>Don't have an account? <Link className = "link" to ="/signup">Register</Link></p>
+    </FormContainer>
+  
   );
 };
 
