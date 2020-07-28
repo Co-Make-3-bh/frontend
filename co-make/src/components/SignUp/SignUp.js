@@ -51,25 +51,25 @@ const StyledForm = styled.form`
 `
 
 function SignUp() {
-    const dispatch = useDispatch()
-    const initialFormValues = {
-        username: '',
-        email: '',
-        password: '',
-        zip: ''
-    }
+  const dispatch = useDispatch();
+  const initialFormValues = {
+    username: "",
+    email: "",
+    password: "",
+    zip: "",
+  };
 
-    const initialErrors = {
-        username: '',
-        password: '',
-        zip: ''
-    }
+  const initialErrors = {
+    username: "",
+    password: "",
+    zip: "",
+  };
 
-    const [userValues, setUserValues] = useState(initialFormValues)
-    const [errors, setErrors] = useState(initialErrors)
+  const [userValues, setUserValues] = useState(initialFormValues);
+  const [errors, setErrors] = useState(initialErrors);
 
-    const handleChange = (e) => {
-        e.persist()
+  const handleChange = (e) => {
+    e.persist();
 
         setUserValues({
             ...userValues, [e.target.name]: e.target.value
@@ -139,4 +139,4 @@ function SignUp() {
             </StyledForm>
     )
 }
-export default SignUp
+export default SignUp;
