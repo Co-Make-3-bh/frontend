@@ -117,10 +117,10 @@ const StyledFormInput = styled.div`
 const IssueForm = (props) => {
   const { push } = useHistory();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.userReducer);
-  const { isEditing } = useSelector((state) => state.concernsReducer);
+  const { user } = useSelector((state) => state);
+  
 
-  console.log(isEditing);
+  
 
   const initialValues = {
     title: "",

@@ -155,7 +155,7 @@ const Form = (props) => {
         <form>
           <StyledFormInput>
             <h2>Log In to Your Account</h2>
-            <label for="email">Email:&nbsp;</label>
+            <label htmlFor="email">Email:&nbsp;</label>
             <input
               id="email"
               name="email"
@@ -165,7 +165,7 @@ const Form = (props) => {
               value={formValues.email}
             />
 
-            <label for="password">Password:&nbsp;</label>
+            <label htmlFor="password">Password:&nbsp;</label>
             <input
               id="password"
               name="password"
