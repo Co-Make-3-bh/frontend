@@ -117,40 +117,42 @@ const StyledFormInput = styled.div`
 const IssueForm = (props) => {
   const { push } = useHistory();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.userReducer);
-  const { isEditing } = useSelector((state) => state.concernsReducer);
-
-  console.log(isEditing);
+  const { user } = useSelector((state) => state);
 
   const initialValues = {
     title: "",
     description: "",
     createdBy: user.id,
     zip: "",
-    photo:"",
+    imageURL: "",
   };
 
   const [formValues, setFormValues] = useState(initialValues);
   const [errors, setErrors] = useState([]);
   const [image, setImage] = useState("");
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  const uploadImage = e => {
+  const uploadImage = (e) => {
     const files = e.target.files[0];
     const formData = new FormData();
-          formData.append("upload_preset", "upload");
-          formData.append("file", files);
-          setLoading(true);
+    formData.append("upload_preset", "upload");
+    formData.append("file", files);
+    setLoading(true);
 
-          axios.post('https://api.cloudinary.com/v1_1/co-make-test/image/upload', formData)
-          .then(res => {setImage(res.data.url); setFormValues({...formValues, imageURL: res.data.url}) })
-          .then(setLoading(false))
-          .catch(err => console.log(err));
-  }
+    axios
+      .post(
+        "https://api.cloudinary.com/v1_1/co-make-test/image/upload",
+        formData
+      )
+      .then((res) => {
+        setImage(res.data.url);
+        setFormValues({ ...formValues, imageURL: res.data.url });
+      })
+      .then(setLoading(false))
+      .catch((err) => console.log(err));
+  };
 
-
-  
   const handleChange = (e) => {
     setFormValues({
       ...formValues,
@@ -162,7 +164,9 @@ const IssueForm = (props) => {
     e.preventDefault();
     IssueSchema.validate(formValues, { abortEarly: false })
       .then((_) => {
+        console.log(formValues);
         dispatch(addConcern(formValues));
+        push("/profile");
       })
       .catch((err) => {
         console.dir(err);
@@ -195,8 +199,6 @@ const IssueForm = (props) => {
 
   return (
     <CloudinaryContext cloudName="co-make-test">
-      
-
       <FormContainer>
         <div className="error-output">
           {errors.map((err) => (
@@ -245,36 +247,28 @@ const IssueForm = (props) => {
                 value={formValues.description}
               />
 
-        <label htmlFor="file">Upload Photo:&nbsp;</label>
-            <input
-              type="file"
-              name = 'file'
-              accept="image/*"
-              onChange={uploadImage}
-              style={{ border: "none" }}
-              value={formValues.photo}
-             
-            />
+              <label htmlFor="file">Upload Photo:&nbsp;</label>
+              <input
+                type="file"
+                name="file"
+                accept="image/*"
+                onChange={uploadImage}
+                style={{ border: "none" }}
+                value={formValues.photo}
+              />
 
-      <label htmlFor="file">Image Url:&nbsp;</label>
-            <input
-              type="text"
-              name = 'imageURL'
-    
-              onChange={handleChange}
-              style={{ border: "none" }}
-              value={formValues.imageURL}
-             
-            />
-
-            
-            
-         
-
+              <label htmlFor="file">Image Url:&nbsp;</label>
+              <input
+                type="text"
+                name="imageURL"
+                onChange={handleChange}
+                style={{ border: "none" }}
+                value={formValues.imageURL}
+              />
             </StyledFormInput>
           </form>
 
-          {loading ? <p>loading...</p>: <img src ={image}/>}
+          {loading ? <p>loading...</p> : <img src={image} />}
           {/* <section>
             {images.map((i) => (
               <Image key={i} publicId={i} fetch-format="auto" quality="auto" />

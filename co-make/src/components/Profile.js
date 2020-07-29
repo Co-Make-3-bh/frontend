@@ -15,20 +15,20 @@ const ProfileContainer = styled.div`
   width: 100%;
   text-decoration: none;
 
-  h1{
+  h1 {
     font-family: "Quicksand", sans-serif;
   }
 
-  h2{
+  h2 {
     font-family: "Quicksand", sans-serif;
   }
 
-  h3{
+  h3 {
     font-family: "Quicksand", sans-serif;
   }
 
   p {
-    color: #9FB5BD;
+    color: #9fb5bd;
     margin-top: 2%;
     font-size: 1rem;
     font-family: "Quicksand", sans-serif;
@@ -51,18 +51,7 @@ const ProfileContainer = styled.div`
       margin: 9%;
       font-weight:700;
     }
- .concerns-container{
-  width:100%
-  }
-.concerns{
-  width:100%
  
-}
- .list{
-  
- 
-   
- }
 
  .list-item{
    margin:5%;
@@ -76,6 +65,7 @@ const StyledProfile = styled.div`
   height: auto;
   padding: 2%;
   margin-top: 2%;
+  margin-bottom:2%;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -131,19 +121,16 @@ const StyledProfile = styled.div`
     font-size: 1rem;
     font-family: "Quicksand", sans-serif;
 
-    
   }
 
-
-  
-    
   }
+
   @media (max-width: 1000px){
     width:45%;
   }
 
   
-`;
+`
 
 const SecondBackground = styled.div`
 
@@ -157,7 +144,6 @@ const SecondBackground = styled.div`
 `
 
 
-
 const List = styled.ul`
   padding-left: 0;
 `;
@@ -168,7 +154,7 @@ const ListItem = styled.li`
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { user, usersConcerns } = useSelector((state) => state.userReducer);
+  const { user, usersConcerns } = useSelector((state) => state);
   console.log(user);
 
   useEffect(() => {
@@ -176,7 +162,7 @@ const Profile = () => {
   }, []);
   console.log(usersConcerns);
   return (
-    <ProfileContainer>
+  <ProfileContainer>
    
       <StyledProfile>
         <SecondBackground>
@@ -203,10 +189,13 @@ const Profile = () => {
       <p>Zip Code:</p>
       <p className ='detail-text'>{user.zip}</p>
 
+       
+
         </div>
+        </div>  
         
-      </div>
-      </SecondBackground>
+        </SecondBackground>
+      
       <div className = 'container'> </div>
 <div className = 'concerns-container'>
       <div className ='concerns'> 

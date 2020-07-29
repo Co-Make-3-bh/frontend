@@ -85,7 +85,8 @@ export const loginUser = (credentials) => (dispatch) => {
   axiosWithAuth()
     .post("/auth/login", credentials)
     .then((res) => {
-      dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data.data });
+      dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data });
+      console.log("Login", res.data);
       localStorage.setItem("token", res.data.token);
     })
     .catch((err) => {
@@ -170,13 +171,13 @@ export const userConcerns = (userId) => (dispatch) => {
     });
 };
 
-export const addUpvote = (id) => (dispatch) => {
+export const addUpvote = (userId, postId) => (dispatch) => {
   dispatch({ type: ADD_UPVOTE_START });
   axiosWithAuth()
-    .put(`/concerns/upvotes/${id}`)
+    .put(`/concerns/upvotes/${postId}/${userId}`)
     .then((res) => {
-      dispatch({ type: ADD_UPVOTE_SUCCESS, payload: res.data.data });
-      console.log(res);
+      dispatch({ type: ADD_UPVOTE_SUCCESS, payload: res.data });
+      console.log(res.data);
     })
     .catch((err) => {
       dispatch({ type: ADD_UPVOTE_FAILURE });
@@ -190,10 +191,8 @@ export const zipSearch = (zip) => (dispatch) => {
     .get(`/concerns/byZip/${zip}`)
     .then((res) => {
       dispatch({ type: ZIP_SEARCH_SUCCESS, payload: res.data.data });
-      console.log(res);
     })
     .catch((err) => {
       dispatch({ type: ZIP_SEARCH_FAILURE });
-      console.log(err);
     });
 };
