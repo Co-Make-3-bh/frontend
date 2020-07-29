@@ -153,7 +153,7 @@ const Profile = () => {
       <p>Email:</p>
       <p className ='detail-text'>{user.email}</p>
       <p>Zip Code:</p>
-      <p className ='detail-text'>{user.zipCode}</p>
+      <p className ='detail-text'>{user.zip}</p>
 
         </div>
         
