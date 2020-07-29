@@ -131,7 +131,7 @@ const Issue = (props) => {
     <div>
       
       <h2>Post Details:</h2>
-      <img src ={state.photo}/>
+      
       <p>Title: {state.title}</p>
       <p>Description: {state.description}</p>
       {/* <p>Created By: {state.username}</p> */}
