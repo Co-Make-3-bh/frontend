@@ -49,6 +49,10 @@ const StyledForm = styled.div`
 
   align-items: center;
 
+  @media (max-width: 1000px){
+    width:45%;
+  }
+
   form {
     width: 95%;
   }

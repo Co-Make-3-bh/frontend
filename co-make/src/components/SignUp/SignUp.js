@@ -1,9 +1,30 @@
 import React, { useState } from 'react'
+import {  Link } from "react-router-dom";
 import signUpSchema from './signUpSchema'
 import * as yup from 'yup'
 import { registerUser } from "../../store/actions"
 import { useDispatch } from "react-redux"
 import styled from 'styled-components'
+
+const StyledText = styled.p`
+p {
+    color: #c6d7dd;
+    margin-top: 2%;
+    font-size: 1rem;
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .link {
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+
+`
 
 const StyledForm = styled.form`
     width: 25%;
@@ -93,6 +114,7 @@ function SignUp() {
         setUserValues(initialFormValues)
     }
     return (
+       <StyledText>  
             <StyledForm>
                 <div>
                 <h2>Sign Up</h2>
@@ -136,7 +158,13 @@ function SignUp() {
                 
                 <button onClick={handleSubmit}>Sign Up</button>
                 </div>
+              
             </StyledForm>
+
+            <p>Already have an account?{" "} <Link className="link" to="/signin">Sign In</Link></p>
+            </StyledText>
+         
     )
+    
 }
 export default SignUp;

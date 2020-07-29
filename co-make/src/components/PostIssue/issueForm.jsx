@@ -126,7 +126,7 @@ const IssueForm = (props) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [errors, setErrors] = useState([]);
   const [images, setImages] = useState([]);
-
+  
   const handleChange = (e) => {
     console.dir(e.target);
     setFormValues({
@@ -152,32 +152,30 @@ const IssueForm = (props) => {
 
   const beginUpload = tag => {
     const uploadOptions = {
-      cloudName: "co-make-test",
+     cloudName: "co-make-test",
       tags: [tag],
       uploadPreset: "upload"
     };
   
     openUploadWidget(uploadOptions, (error, photos) => {
-      if (!error) {
+    if (!error) {
         console.log(photos);
         if(photos.event === 'success'){
           setImages([...images, photos.info.public_id])
         }
       } else {
         console.log(error);
-      }
+    }
     })
   }
-  useEffect( () => {
+ useEffect( () => {
     fetchPhotos("image", setImages);
   }, [])
 
   return (
     
     <CloudinaryContext cloudName="co-make-test">
-      <section>
-        {images.map(i => <img src={i} alt="" />)}
-      </section>
+     
 
     <FormContainer>
       <div className="error-output">
@@ -239,6 +237,7 @@ const IssueForm = (props) => {
                   quality="auto"
                 />)}
         </section>
+       
 
         <button onClick={() => beginUpload()}>Upload Image</button>
         <button data-cy="submit-button" onClick={handleSubmit}>
