@@ -11,6 +11,7 @@ const Issue = (props) => {
     title: "",
     description: "",
     zip: "",
+    photo:"",
   });
   const { push } = useHistory();
 
@@ -54,6 +55,7 @@ const Issue = (props) => {
   // );
   return !isEditing ? (
     <div>
+      <img>{state.photo}</img>
       <p>Title: {state.title}</p>
       <p>Description: {state.description}</p>
       <p>Created By: {state.username}</p>
