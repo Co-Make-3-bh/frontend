@@ -6,6 +6,11 @@ import styled from "styled-components";
 
 import { fetchConcerns, addUpvote, zipSearch } from "../store/actions";
 
+
+const HomePageStyles = styled.div`
+  font-family: "Quicksand", sans-serif;
+`
+
 const UpVotes = styled.div`
   width: 10%;
   display: flex;
@@ -26,6 +31,10 @@ const StyledIssue = styled.div`
   margin-top: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  &:hover{
+    transition: .4s;
+    box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
   div{
     min-width: 20%;
     text-align: left;
@@ -39,6 +48,12 @@ const Search = styled.input`
   border: none;
   padding: 0.5%;
   margin: 0 auto;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  &:hover{
+    transition: .4s;
+    box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
 `;
 
 const Form = styled.form`
@@ -74,7 +89,7 @@ const HomePage = () => {
   };
 
   return (
-    <div>
+    <HomePageStyles>
       <h1>Community Issues</h1>
       <Form onSubmit={handleSearch}>
         <Search
@@ -108,7 +123,7 @@ const HomePage = () => {
           </StyledIssue>
         );
       })}
-    </div>
+    </HomePageStyles>
   );
 };
 
