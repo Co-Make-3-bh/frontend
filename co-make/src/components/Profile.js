@@ -34,7 +34,39 @@ const ProfileContainer = styled.div`
     font-family: "Quicksand", sans-serif;
   }
 
+  .link{
+      text-decoration: none;
+    color: white;
+    }
+
+    
+
+    .concern-link{
+      text-decoration: none;
+      border: 2px solid #2b85a2;
+      background-color:white;
+      color: #2b85a2;
+      border-radius: 4px;
+      padding: 10px 10px;
+      margin: 9%;
+      font-weight:700;
+    }
+ .concerns-container{
+  width:100%
+  }
+.concerns{
+  width:100%
+ 
+}
+ .list{
   
+ 
+   
+ }
+
+ .list-item{
+   margin:5%;
+ }
 
   
 `;
@@ -64,6 +96,9 @@ const StyledProfile = styled.div`
   }
   .container{
     border-bottom: 1px solid black;
+    margin:2%;
+    
+    
     
   }
 
@@ -96,11 +131,11 @@ const StyledProfile = styled.div`
     font-size: 1rem;
     font-family: "Quicksand", sans-serif;
 
-    .link{
-      text-decoration: none;
-    color: white;
-    }
+    
   }
+
+
+  
     
   }
   @media (max-width: 1000px){
@@ -109,6 +144,17 @@ const StyledProfile = styled.div`
 
   
 `;
+
+const SecondBackground = styled.div`
+
+.white-background{
+  background-color:white;
+  border-radius: 20px;
+  border: 2px solid #2b85a2;
+  padding:2%;
+}
+
+`
 
 
 
@@ -133,6 +179,8 @@ const Profile = () => {
     <ProfileContainer>
    
       <StyledProfile>
+        <SecondBackground>
+        <div className ='white-background'>
     <div className = 'header'>
 
       <div className ='title'> 
@@ -145,7 +193,7 @@ const Profile = () => {
 
       </div>
 
-      <div className = 'container'>
+    
         <div className = 'details-container'>
       <h2>User Details</h2>
       <p>Username:</p>
@@ -158,15 +206,20 @@ const Profile = () => {
         </div>
         
       </div>
+      </SecondBackground>
+      <div className = 'container'> </div>
+<div className = 'concerns-container'>
+      <div className ='concerns'> 
       {usersConcerns.length > 0 ? (
         <>
           <h3>Here is what you have added.</h3>
-          <List>
+
+          <List className ='list'>
             {usersConcerns.map(
               (concern) => (
-                <ListItem key={concern.id}>
+                <ListItem className = 'list-item' key={concern.id}>
                   <Link
-                    to={{ pathname: `/issue/${concern.id}`, state: concern }}
+                    className ='concern-link' to={{ pathname: `/issue/${concern.id}`, state: concern }}
                   >
                     {concern.title}
                   </Link>
@@ -181,6 +234,9 @@ const Profile = () => {
           You currently don't have any concerns about your community posted.
         </h3>
       )}
+      
+      </div>
+      </div>
      
       </StyledProfile>
     
