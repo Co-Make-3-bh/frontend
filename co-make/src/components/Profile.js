@@ -71,6 +71,13 @@ const StyledProfile = styled.div`
     text-align:left;
     margin:2%;
     margin-bottom:5%;
+
+     .detail-text{
+      font-family: "Quicksand", sans-serif;
+      color:black;
+  }
+
+     }
   }
 
   .post-btn{
@@ -129,7 +136,7 @@ const Profile = () => {
     <div className = 'header'>
 
       <div className ='title'> 
-      <h1>Welcome back, Username Placeholder{user.username}</h1>
+      <h1>Welcome back, {user.username}</h1>
       </div>
 
       <div className = 'post-btn'>
@@ -142,11 +149,11 @@ const Profile = () => {
         <div className = 'details-container'>
       <h2>User Details</h2>
       <p>Username:</p>
-      username placeholder
+      <p className ='detail-text'>{user.username}</p>
       <p>Email:</p>
-       emailplaceholder@email.com
+      <p className ='detail-text'>{user.email}</p>
       <p>Zip Code:</p>
-      12345
+      <p className ='detail-text'>{user.zipCode}</p>
 
         </div>
         
