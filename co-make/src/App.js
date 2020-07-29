@@ -12,7 +12,6 @@ import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp/SignUp";
 import styled from "styled-components";
 
-
 const StyledNav = styled.nav`
   display: flex;
   align-items: center;
@@ -24,8 +23,8 @@ const StyledNav = styled.nav`
     font-family: "Rock Salt", cursive;
     width: 20%;
 
-    @media (max-width:1000px){
-      width:25%;
+    @media (max-width: 1000px) {
+      width: 25%;
     }
   }
   .linkDiv {
@@ -48,17 +47,13 @@ const StyledNav = styled.nav`
 function App() {
   const [users, setUsers] = useState([]);
   const [issues, setIssues] = useState([]);
-  
-  
 
   const { push } = useHistory();
   const handleSignOut = () => {
     push("/");
     localStorage.removeItem("token");
-    console.log(localStorage);
   };
   return (
-  
     <div className="App">
       <header>
         <StyledNav>
@@ -87,10 +82,7 @@ function App() {
         <Route path="/issue/:id" component={Issue} />
         <Route path="/postissue">
           <IssueForm setIssues={setIssues} issues={issues} />
-          <Issues issues={issues}  />
-       
-          
-          
+          <Issues issues={issues} />
         </Route>
         <Route path="/signup">
           <SignUp />
@@ -106,7 +98,6 @@ function App() {
         <PrivateRoute path="/profile" component={Profile} /> */}
       </Switch>
     </div>
-   
   );
 }
 

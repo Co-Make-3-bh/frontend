@@ -17,7 +17,7 @@ const UpVotes = styled.div`
   }
 `;
 const StyledIssue = styled.div`
-  background-color: #E5EBED;
+  background-color: #e5ebed;
   display: flex;
   width: 45%;
   margin: 0 auto;
@@ -25,12 +25,11 @@ const StyledIssue = styled.div`
   margin-top: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  div{
+  div {
     min-width: 20%;
     text-align: left;
-    
   }
-`
+`;
 
 const Search = styled.input`
   width: 50%;
@@ -55,14 +54,16 @@ const HomePage = () => {
   const [searchBy, setSearchBy] = useState("");
   const dispatch = useDispatch();
   const { concerns } = useSelector((state) => state.concernsReducer);
-  const { user } = useSelector((state) => state.userReducer);
-
+  const { user, userLikes } = useSelector((state) => state.userReducer);
+  // console.log(user);
+  console.log(userLikes);
+  console.log(concerns);
   useEffect(() => {
     dispatch(fetchConcerns());
   }, []);
 
   const handleSearch = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     dispatch(zipSearch(searchBy));
     setSearchBy("");
   };
@@ -85,7 +86,6 @@ const HomePage = () => {
         <SearchIcon onClick={handleSearch} icon={faSearch} />
       </Form>
       {concerns.map((concern) => {
-        console.log(concern);
         return (
           <StyledIssue key={concern.id}>
             <UpVotes>
@@ -93,15 +93,22 @@ const HomePage = () => {
               <FontAwesomeIcon
                 className="upvote"
                 onClick={() => {
-                  dispatch(addUpvote(concern.id));
+                  console.log("Homepage 96", concern.id);
+                  if (userLikes.length) {
+                    if (!userLikes.some((el) => el.concern_id === concern.id)) {
+                      dispatch(addUpvote(user.id, concern.id));
+                    }
+                  } else {
+                    dispatch(addUpvote(user.id, concern.id));
+                  }
                 }}
                 icon={faAngleUp}
               />
             </UpVotes>
             <div>
-            <h2>{concern.title}</h2>
-            <p>{concern.description}</p>
-            <p>{concern.zip}</p>
+              <h2>{concern.title}</h2>
+              <p>{concern.description}</p>
+              <p>{concern.zip}</p>
             </div>
           </StyledIssue>
         );
