@@ -38,7 +38,7 @@ const FormContainer = styled.div`
 const StyledForm = styled.div`
   background-color: #e5ebed;
   width: 50%;
-  height: 1400px;
+  height: auto;
   padding: 2%;
   margin-top: 5%;
 
@@ -144,7 +144,7 @@ const IssueForm = (props) => {
           setLoading(true);
 
           axios.post('https://api.cloudinary.com/v1_1/co-make-test/image/upload', formData)
-          .then(res => setImage(res.data.url))
+          .then(res => {setImage(res.data.url); setFormValues({...formValues, imageURL: res.data.url}) })
           .then(setLoading(false))
           .catch(err => console.log(err));
   }
@@ -253,6 +253,17 @@ const IssueForm = (props) => {
               onChange={uploadImage}
               style={{ border: "none" }}
               value={formValues.photo}
+             
+            />
+
+      <label htmlFor="file">Image Url:&nbsp;</label>
+            <input
+              type="text"
+              name = 'imageURL'
+    
+              onChange={handleChange}
+              style={{ border: "none" }}
+              value={formValues.imageURL}
              
             />
 

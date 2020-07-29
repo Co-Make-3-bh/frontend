@@ -38,6 +38,7 @@ const StyledNav = styled.nav`
       font-size: 1.2rem;
 
       &:hover {
+        transition: .7s;
         color: black;
       }
     }
