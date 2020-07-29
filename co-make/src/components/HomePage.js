@@ -7,11 +7,10 @@ import styled from "styled-components";
 import { fetchConcerns, addUpvote } from "../store/actions";
 
 const UpVotes = styled.div`
-  width: 3%;
+  width: 10%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  margin: 0 auto;
+  
 
   .upvote {
     &:hover {
@@ -19,6 +18,21 @@ const UpVotes = styled.div`
     }
   }
 `;
+const StyledIssue = styled.div`
+  background-color: #E5EBED;
+  display: flex;
+  width: 45%;
+  margin: 0 auto;
+  padding: 2%;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  div{
+    min-width: 20%;
+    text-align: left;
+    
+  }
+`
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -35,10 +49,7 @@ const HomePage = () => {
       {concerns.map((concern) => {
         console.log(concern);
         return (
-          <div key={concern.id}>
-            <h2>{concern.title}</h2>
-            <p>{concern.description}</p>
-            <p>{concern.zip}</p>
+          <StyledIssue key={concern.id}>
             <UpVotes>
               <p>{concern.upvotes}</p>
               <FontAwesomeIcon
@@ -49,7 +60,12 @@ const HomePage = () => {
                 icon={faAngleUp}
               />
             </UpVotes>
-          </div>
+            <div>
+            <h2>{concern.title}</h2>
+            <p>{concern.description}</p>
+            <p>{concern.zip}</p>
+            </div>
+          </StyledIssue>
         );
       })}
     </div>
