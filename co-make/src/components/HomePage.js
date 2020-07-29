@@ -10,8 +10,11 @@ const UpVotes = styled.div`
   width: 10%;
   display: flex;
   align-items: center;
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> 0bff03751ba8e3d2a717763956b4073adabd9d75
   .upvote {
     &:hover {
       cursor: pointer;

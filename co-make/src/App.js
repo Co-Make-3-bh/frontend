@@ -23,6 +23,10 @@ const StyledNav = styled.nav`
     font-size: 2.5rem;
     font-family: "Rock Salt", cursive;
     width: 20%;
+
+    @media (max-width:1000px){
+      width:25%;
+    }
   }
   .linkDiv {
     margin: 10px;
