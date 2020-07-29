@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import axios from "axios";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { IssueSchema } from "./issueSchema";
@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { addConcern } from "../../store/actions";
 import { CloudinaryContext, Image } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "./utils/CloudinaryService";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const FormContainer = styled.div`
   display: flex;
@@ -126,12 +127,30 @@ const IssueForm = (props) => {
     description: "",
     createdBy: user.id,
     zip: "",
+    photo:"",
   };
 
   const [formValues, setFormValues] = useState(initialValues);
   const [errors, setErrors] = useState([]);
-  const [images, setImages] = useState([]);
+  const [image, setImage] = useState("");
 
+  const [loading, setLoading] = useState(false)
+
+  const uploadImage = e => {
+    const files = e.target.files[0];
+    const formData = new FormData();
+          formData.append("upload_preset", "upload");
+          formData.append("file", files);
+          setLoading(true);
+
+          axios.post('https://api.cloudinary.com/v1_1/co-make-test/image/upload', formData)
+          .then(res => setImage(res.data.url))
+          .then(setLoading(false))
+          .catch(err => console.log(err));
+  }
+
+
+  
   const handleChange = (e) => {
     setFormValues({
       ...formValues,
@@ -152,35 +171,31 @@ const IssueForm = (props) => {
     setFormValues(initialValues);
   };
 
-  const beginUpload = (tag) => {
-    const uploadOptions = {
-      cloudName: "co-make-test",
-      tags: [tag],
-      uploadPreset: "upload",
-    };
+  // const beginUpload = (tag) => {
+  //   const uploadOptions = {
+  //    cloudName: "co-make-test",
+  //     tags: [tag],
+  //     uploadPreset: "upload",
+  //   };
 
-    openUploadWidget(uploadOptions, (error, photos) => {
-      if (!error) {
-        console.log(photos);
-        if (photos.event === "success") {
-          setImages([...images, photos.info.public_id]);
-        }
-      } else {
-        console.log(error);
-      }
-    });
-  };
-  useEffect(() => {
-    fetchPhotos("image", setImages);
-  }, []);
+  //   openUploadWidget(uploadOptions, (error, photos) => {
+  //     if (!error) {
+  //         console.log(photos);
+  //         if (photos.event === "success") {
+  //           setImages([...images, photos.info.public_id]);
+  //         }
+  //       } else {
+  //         console.log(error);
+  //       }
+  //     });
+  // };
+  // useEffect(() => {
+  //   fetchPhotos("image", setImages);
+  // }, []);
 
   return (
     <CloudinaryContext cloudName="co-make-test">
-      <section>
-        {images.map((i) => (
-          <img src={i} alt="" />
-        ))}
-      </section>
+      
 
       <FormContainer>
         <div className="error-output">
@@ -229,15 +244,31 @@ const IssueForm = (props) => {
                 onChange={handleChange}
                 value={formValues.description}
               />
+
+        <label htmlFor="file">Upload Photo:&nbsp;</label>
+            <input
+              type="file"
+              name = 'file'
+              accept="image/*"
+              onChange={uploadImage}
+              style={{ border: "none" }}
+              value={formValues.photo}
+             
+            />
+
+            {loading ? <p>loading...</p>: <img src ={image}/>}
+            
+         
+
             </StyledFormInput>
           </form>
-          <section>
+          {/* <section>
             {images.map((i) => (
               <Image key={i} publicId={i} fetch-format="auto" quality="auto" />
             ))}
           </section>
 
-          <button onClick={() => beginUpload()}>Upload Image</button>
+          <button onClick={() => beginUpload()}>Upload Image</button> */}
           <button data-cy="submit-button" onClick={handleSubmit}>
             Post New Issue
           </button>

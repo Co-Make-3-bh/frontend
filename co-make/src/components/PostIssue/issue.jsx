@@ -84,6 +84,7 @@ const Issue = (props) => {
     title: "",
     description: "",
     zip: "",
+    photo:"",
   });
   const { push } = useHistory();
 
@@ -128,7 +129,9 @@ const Issue = (props) => {
   return !isEditing ? (
     <StyledDetailsCon>
     <div>
+      
       <h2>Post Details:</h2>
+      
       <p>Title: {state.title}</p>
       <p>Description: {state.description}</p>
       {/* <p>Created By: {state.username}</p> */}
@@ -163,6 +166,7 @@ const Issue = (props) => {
         value={form.zip}
         onChange={handleChanges}
       ></input>
+      
       <button>Submit</button>
       </StyledForm>
     </FormContainer>
