@@ -45,8 +45,10 @@ export const USER_CONCERNS_START = "USER_CONCERNS_START";
 export const USER_CONCERNS_SUCCESS = "USER_CONCERNS_SUCCESS";
 export const USER_CONCERNS_FAILURE = "USER_CONCERNS_FAILURE";
 
-//Set editing...
-export const SET_EDITING = "SET_EDITING";
+//Add upvote...
+export const ADD_UPVOTE_START = "ADD_UPVOTE_START";
+export const ADD_UPVOTE_SUCCESS = "ADD_UPVOTE_SUCCESS";
+export const ADD_UPVOTE_FAILURE = "ADD_UPVOTE_FAILURE";
 
 export const fetchConcerns = () => (dispatch) => {
   dispatch({ type: FETCH_CONCERNS_START });
@@ -159,6 +161,20 @@ export const userConcerns = (userId) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({ type: USER_CONCERNS_FAILURE });
+      console.log(err);
+    });
+};
+
+export const addUpvote = (id) => (dispatch) => {
+  dispatch({ type: ADD_UPVOTE_START });
+  axiosWithAuth()
+    .put(`/concerns/upvotes/${id}`)
+    .then((res) => {
+      dispatch({ type: ADD_UPVOTE_SUCCESS, payload: res.data.data });
+      console.log(res);
+    })
+    .catch((err) => {
+      dispatch({ type: ADD_UPVOTE_FAILURE });
       console.log(err);
     });
 };
