@@ -7,7 +7,7 @@ import Issue from "./PostIssue/issue";
 
 
 
-const FormContainer = styled.div`
+const ProfileContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -130,7 +130,7 @@ const Profile = () => {
   }, []);
   console.log(usersConcerns);
   return (
-    <FormContainer>
+    <ProfileContainer>
    
       <StyledProfile>
     <div className = 'header'>
@@ -184,7 +184,7 @@ const Profile = () => {
      
       </StyledProfile>
     
-    </FormContainer>
+    </ProfileContainer>
   );
 };
 
