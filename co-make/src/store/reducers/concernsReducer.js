@@ -2,9 +2,9 @@ import {
   FETCH_CONCERNS_START,
   FETCH_CONCERNS_SUCCESS,
   FETCH_CONCERNS_FAILURE,
-  FETCH_CONCERN_START,
-  FETCH_CONCERN_FAILURE,
-  FETCH_CONCERN_SUCCESS,
+  ZIP_SEARCH_START,
+  ZIP_SEARCH_SUCCESS,
+  ZIP_SEARCH_FAILURE,
   ADD_UPVOTE_START,
   ADD_UPVOTE_SUCCESS,
   ADD_UPVOTE_FAILURE,
@@ -51,6 +51,12 @@ const concernsReducer = (state = initialState, action) => {
       };
     case ADD_UPVOTE_FAILURE:
       return { ...state, isUpdating: false, error: action.payload };
+    case ZIP_SEARCH_START:
+      return { ...state, isFetching: true, error: "" };
+    case ZIP_SEARCH_SUCCESS:
+      return { ...state, isFetching: false, concerns: action.payload };
+    case ZIP_SEARCH_FAILURE:
+      return { ...state, isFetching: false, error: action.payload };
     default:
       return state;
   }
