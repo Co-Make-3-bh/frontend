@@ -10,12 +10,8 @@ const UpVotes = styled.div`
   width: 10%;
   display: flex;
   align-items: center;
-<<<<<<< HEAD
-  
-
-=======
->>>>>>> 0bff03751ba8e3d2a717763956b4073adabd9d75
   .upvote {
+    margin-left: 3%;
     &:hover {
       cursor: pointer;
     }
@@ -46,8 +42,9 @@ const Search = styled.input`
 `;
 
 const Form = styled.form`
-  position: absolute;
+  // position: absolute;
   width: 100%;
+  margin: 0 auto;
 `;
 
 const SearchIcon = styled(FontAwesomeIcon)`
@@ -78,7 +75,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>HomePage</h1>
+      <h1>Community Issues</h1>
       <Form onSubmit={handleSearch}>
         <Search
           type="text"
