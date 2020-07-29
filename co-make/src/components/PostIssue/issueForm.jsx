@@ -256,12 +256,14 @@ const IssueForm = (props) => {
              
             />
 
-            {loading ? <p>loading...</p>: <img src ={image}/>}
+            
             
          
 
             </StyledFormInput>
           </form>
+
+          {loading ? <p>loading...</p>: <img src ={image}/>}
           {/* <section>
             {images.map((i) => (
               <Image key={i} publicId={i} fetch-format="auto" quality="auto" />
