@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Issue from "./PostIssue/issue";
 
-
-
 const FormContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -15,28 +13,24 @@ const FormContainer = styled.div`
   width: 100%;
   text-decoration: none;
 
-  h1{
+  h1 {
     font-family: "Quicksand", sans-serif;
   }
 
-  h2{
+  h2 {
     font-family: "Quicksand", sans-serif;
   }
 
-  h3{
+  h3 {
     font-family: "Quicksand", sans-serif;
   }
 
   p {
-    color: #9FB5BD;
+    color: #9fb5bd;
     margin-top: 2%;
     font-size: 1rem;
     font-family: "Quicksand", sans-serif;
   }
-
-  
-
-  
 `;
 const StyledProfile = styled.div`
   background-color: #e5ebed;
@@ -110,8 +104,6 @@ const StyledProfile = styled.div`
   
 `;
 
-
-
 const List = styled.ul`
   padding-left: 0;
 `;
@@ -122,7 +114,7 @@ const ListItem = styled.li`
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { user, usersConcerns } = useSelector((state) => state.userReducer);
+  const { user, usersConcerns } = useSelector((state) => state);
   console.log(user);
 
   useEffect(() => {
@@ -131,59 +123,56 @@ const Profile = () => {
   console.log(usersConcerns);
   return (
     <FormContainer>
-   
       <StyledProfile>
-    <div className = 'header'>
+        <div className="header">
+          <div className="title">
+            <h1>Welcome back, {user.username}</h1>
+          </div>
 
-      <div className ='title'> 
-      <h1>Welcome back, {user.username}</h1>
-      </div>
-
-      <div className = 'post-btn'>
-       <button><Link className ='link'to="/postissue">Post New Issue</Link></button>
-      </div>
-
-      </div>
-
-      <div className = 'container'>
-        <div className = 'details-container'>
-      <h2>User Details</h2>
-      <p>Username:</p>
-      <p className ='detail-text'>{user.username}</p>
-      <p>Email:</p>
-      <p className ='detail-text'>{user.email}</p>
-      <p>Zip Code:</p>
-      <p className ='detail-text'>{user.zip}</p>
-
+          <div className="post-btn">
+            <button>
+              <Link className="link" to="/postissue">
+                Post New Issue
+              </Link>
+            </button>
+          </div>
         </div>
-        
-      </div>
-      {usersConcerns.length > 0 ? (
-        <>
-          <h3>Here is what you have added.</h3>
-          <List>
-            {usersConcerns.map(
-              (concern) => (
-                <ListItem key={concern.id}>
-                  <Link
-                    to={{ pathname: `/issue/${concern.id}`, state: concern }}
-                  >
-                    {concern.title}
-                  </Link>
-                </ListItem>
-              )
-              //
-            )}
-          </List>
-        </>
-      ) : (
-        <h3>
-          You currently don't have any concerns about your community posted.
-        </h3>
-      )}
-     
+
+        <div className="container">
+          <div className="details-container">
+            <h2>User Details</h2>
+            <p>Username:</p>
+            <p className="detail-text">{user.username}</p>
+            <p>Email:</p>
+            <p className="detail-text">{user.email}</p>
+            <p>Zip Code:</p>
+            <p className="detail-text">{user.zip}</p>
+          </div>
+        </div>
+        {usersConcerns.length > 0 ? (
+          <>
+            <h3>Here is what you have added.</h3>
+            <List>
+              {usersConcerns.map(
+                (concern) => (
+                  <ListItem key={concern.id}>
+                    <Link
+                      to={{ pathname: `/issue/${concern.id}`, state: concern }}
+                    >
+                      {concern.title}
+                    </Link>
+                  </ListItem>
+                )
+                //
+              )}
+            </List>
+          </>
+        ) : (
+          <h3>
+            You currently don't have any concerns about your community posted.
+          </h3>
+        )}
       </StyledProfile>
-    
     </FormContainer>
   );
 };

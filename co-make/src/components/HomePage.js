@@ -70,8 +70,8 @@ const SearchIcon = styled(FontAwesomeIcon)`
 const HomePage = () => {
   const [searchBy, setSearchBy] = useState("");
   const dispatch = useDispatch();
-  const { concerns } = useSelector((state) => state.concernsReducer);
-  const { user, userLikes } = useSelector((state) => state.userReducer);
+  const { concerns } = useSelector((state) => state);
+  const { user, userLikes } = useSelector((state) => state);
   // console.log(user);
   console.log(userLikes);
   console.log(concerns);

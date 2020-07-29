@@ -8,16 +8,14 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { BrowserRouter as Router } from "react-router-dom";
-import rootReducer from "./store/reducers/index";
+import { reducer } from "./store/reducers/index";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-  rootReducer,
+  reducer,
   composeEnhancers(applyMiddleware(thunk, logger))
 );
-
-console.log(store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
