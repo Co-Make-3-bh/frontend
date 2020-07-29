@@ -50,6 +50,11 @@ export const ADD_UPVOTE_START = "ADD_UPVOTE_START";
 export const ADD_UPVOTE_SUCCESS = "ADD_UPVOTE_SUCCESS";
 export const ADD_UPVOTE_FAILURE = "ADD_UPVOTE_FAILURE";
 
+//Search by zip...
+export const ZIP_SEARCH_START = "ZIP_SEARCH_START";
+export const ZIP_SEARCH_SUCCESS = "ZIP_SEARCH_SUCCESS";
+export const ZIP_SEARCH_FAILURE = "ZIP_SEARCH_FAILURE";
+
 export const fetchConcerns = () => (dispatch) => {
   dispatch({ type: FETCH_CONCERNS_START });
   axiosWithAuth()
@@ -175,6 +180,20 @@ export const addUpvote = (id) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({ type: ADD_UPVOTE_FAILURE });
+      console.log(err);
+    });
+};
+
+export const zipSearch = (zip) => (dispatch) => {
+  dispatch({ type: ZIP_SEARCH_START });
+  axiosWithAuth()
+    .get(`/concerns/byZip/${zip}`)
+    .then((res) => {
+      dispatch({ type: ZIP_SEARCH_SUCCESS, payload: res.data.data });
+      console.log(res);
+    })
+    .catch((err) => {
+      dispatch({ type: ZIP_SEARCH_FAILURE });
       console.log(err);
     });
 };
