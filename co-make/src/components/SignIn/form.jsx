@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { registerSchema } from "./schema";

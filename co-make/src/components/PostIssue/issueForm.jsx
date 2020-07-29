@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 // import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { IssueSchema } from "./issueSchema";
 import styled from "styled-components";
 import { addConcern } from "../../store/actions";
-import { CloudinaryContext,Image} from "cloudinary-react";
+import { CloudinaryContext, Image } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "./utils/CloudinaryService";
 
 const FormContainer = styled.div`
@@ -50,7 +51,7 @@ const StyledForm = styled.div`
 
   form {
     width: 95%;
-    margin-bottom:5%;
+    margin-bottom: 5%;
   }
 
   button {
@@ -110,16 +111,20 @@ const StyledFormInput = styled.div`
     border-radius: 4px;
     box-sizing: border-box;
   }
-
-  
 `;
 
 const IssueForm = (props) => {
+  const { push } = useHistory();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userReducer);
+  const { isEditing } = useSelector((state) => state.concernsReducer);
+
+  console.log(isEditing);
+
   const initialValues = {
     title: "",
     description: "",
-    createdBy: 1, //will be user.id when logged in
+    createdBy: user.id,
     zip: "",
   };
 
@@ -128,7 +133,6 @@ const IssueForm = (props) => {
   const [images, setImages] = useState([]);
   
   const handleChange = (e) => {
-    console.dir(e.target);
     setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
@@ -146,58 +150,59 @@ const IssueForm = (props) => {
         setErrors([...err.inner]);
       });
     setFormValues(initialValues);
-    
   };
 
-
-  const beginUpload = tag => {
+  const beginUpload = (tag) => {
     const uploadOptions = {
      cloudName: "co-make-test",
       tags: [tag],
-      uploadPreset: "upload"
+      uploadPreset: "upload",
     };
-  
+
     openUploadWidget(uploadOptions, (error, photos) => {
     if (!error) {
         console.log(photos);
-        if(photos.event === 'success'){
-          setImages([...images, photos.info.public_id])
+        if (photos.event === "success") {
+          setImages([...images, photos.info.public_id]);
         }
       } else {
         console.log(error);
-    }
-    })
-  }
- useEffect( () => {
+      }
+    });
+  };
+  useEffect(() => {
     fetchPhotos("image", setImages);
-  }, [])
+  }, []);
 
   return (
-    
     <CloudinaryContext cloudName="co-make-test">
-     
-
-    <FormContainer>
-      <div className="error-output">
-        {errors.map((err) => (
-          <p style={{ color: "red" }}>{err.message}</p>
+      <section>
+        {images.map((i) => (
+          <img src={i} alt="" />
         ))}
-      </div>
-      <StyledForm>
-        <form>
-          <StyledFormInput>
-            <h2>Post an Issue</h2>
+      </section>
 
-            <label htmlFor="title">Title:&nbsp;</label>
-            <input
-              name="title"
-              type="text"
-              data-cy="input-title"
-              onChange={handleChange}
-              value={formValues.title}
-            />
+      <FormContainer>
+        <div className="error-output">
+          {errors.map((err) => (
+            <p style={{ color: "red" }}>{err.message}</p>
+          ))}
+        </div>
+        <StyledForm>
+          <form>
+            <StyledFormInput>
+              <h2>Post an Issue</h2>
 
-            {/* <label htmlFor="createdBy">Created By:&nbsp;</label>
+              <label htmlFor="title">Title:&nbsp;</label>
+              <input
+                name="title"
+                type="text"
+                data-cy="input-title"
+                onChange={handleChange}
+                value={formValues.title}
+              />
+
+              {/* <label htmlFor="createdBy">Created By:&nbsp;</label>
             <input
               name="createdBy"
               type="text"
@@ -206,45 +211,38 @@ const IssueForm = (props) => {
               value={formValues.createdBy}
             /> */}
 
-            <label htmlFor="zipCode">Zip Code:&nbsp;</label>
-            <input
-              name="zip"
-              type="text"
-              data-cy="input-zipcode"
-              onChange={handleChange}
-              value={formValues.zip}
-            />
+              <label htmlFor="zipCode">Zip Code:&nbsp;</label>
+              <input
+                name="zip"
+                type="text"
+                data-cy="input-zipcode"
+                onChange={handleChange}
+                value={formValues.zip}
+              />
 
-            <label htmlFor="description">Description:&nbsp;</label>
-            <textarea
-              id="description"
-              name="description"
-              type="text"
-              data-cy="input-description"
-              onChange={handleChange}
-              value={formValues.description}
-            />
-                
-               
-          
-          </StyledFormInput>
-        </form>
-        <section>
-            {images.map(i => <Image
-                  key={i}
-                  publicId={i}
-                  fetch-format="auto"
-                  quality="auto"
-                />)}
-        </section>
-       
+              <label htmlFor="description">Description:&nbsp;</label>
+              <textarea
+                id="description"
+                name="description"
+                type="text"
+                data-cy="input-description"
+                onChange={handleChange}
+                value={formValues.description}
+              />
+            </StyledFormInput>
+          </form>
+          <section>
+            {images.map((i) => (
+              <Image key={i} publicId={i} fetch-format="auto" quality="auto" />
+            ))}
+          </section>
 
-        <button onClick={() => beginUpload()}>Upload Image</button>
-        <button data-cy="submit-button" onClick={handleSubmit}>
-              Post New Issue
-            </button>
-      </StyledForm>
-    </FormContainer>
+          <button onClick={() => beginUpload()}>Upload Image</button>
+          <button data-cy="submit-button" onClick={handleSubmit}>
+            Post New Issue
+          </button>
+        </StyledForm>
+      </FormContainer>
     </CloudinaryContext>
   );
 };
