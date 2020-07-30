@@ -37,7 +37,7 @@ const FormContainer = styled.div`
 const StyledForm = styled.div`
   background-color: #e5ebed;
   width: 25%;
-  height: 580px;
+  height: auto;
   padding: 2%;
   margin-top: 2%;
   border-radius: 20px;
@@ -145,11 +145,7 @@ const Form = (props) => {
 
   return (
     <FormContainer>
-      <div className="errors">
-        {errors.map((err) => (
-          <p style={{ color: "red" }}>{err.message}</p>
-        ))}
-      </div>
+      
 
       <StyledForm>
         <form>
@@ -174,6 +170,12 @@ const Form = (props) => {
               onChange={handleChange}
               value={formValues.password}
             />
+
+<div className="errors">
+        {errors.map((err) => (
+          <p style={{ color: "red" }}>{err.message}</p>
+        ))}
+      </div>
 
             <button data-cy="submit-button" onClick={handleSubmit}>
               Login
