@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { faAngleUp, faSearch, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faAngleUp, faSearch, faPenSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
@@ -115,11 +115,14 @@ const SearchIcon = styled(FontAwesomeIcon)`
 
 const NewIssue = styled(FontAwesomeIcon)`
   position: fixed;
-  top: 50px;
+  top: 40px;
   right: 0;
-  left:20%;
- 
-  width:100%;
+  left:22%;
+  font-size: 2.5rem;
+  color:black;
+
+
+  
 `;
 
 const ImgCont = styled.div`
@@ -152,7 +155,7 @@ const HomePage = () => {
     <HomePageStyles>
       <h1>C0MMUNITY ISSUES</h1>
       <div className ='form-container'>
-       <Link> <NewIssue icon ={faPen}/></Link>
+       <Link to ='/postissue'> <NewIssue icon ={faPenSquare}/></Link>
       <Form onSubmit={handleSearch}>
      
         <Search
