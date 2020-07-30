@@ -17,7 +17,7 @@ const HomePageStyles = styled.div`
 }
  
 h1{
-  
+  font-size: 3rem;
 }
 
 `;
@@ -27,9 +27,10 @@ const UpVotes = styled.div`
   display: flex;
   align-items: center;
   margin: 4%;
+  color:#7f8385;
   
   .upvote {
-    margin-left: 3%;
+    margin-right: 3%;
     background-color:black;
     border-radius: 5px;
     color:white;
@@ -190,8 +191,7 @@ const HomePage = () => {
         return (
           <StyledIssue key={concern.id}>
             <UpVotes>
-              <p>{concern.upvotes}</p>
-              <FontAwesomeIcon
+            <FontAwesomeIcon
                 className="upvote"
                 onClick={() => {
                   console.log("Homepage 96", concern.id);
@@ -205,6 +205,8 @@ const HomePage = () => {
                 }}
                 icon={faAngleUp}
               />
+              <p>{concern.upvotes}</p>
+              
             </UpVotes>
             <div>
               <h2>{concern.title}</h2>

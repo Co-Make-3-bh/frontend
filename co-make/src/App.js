@@ -39,6 +39,7 @@ const StyledNav = styled.nav`
   .linkDiv {
     margin: 10px;
     width: 35%;
+    
     .link {
       padding: 2%;
       margin-left: 10px;
