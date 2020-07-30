@@ -11,7 +11,6 @@ const ProfileContainer = styled.div`
   align-items: center;
   width: 100%;
   text-decoration: none;
- 
 
   h1 {
     font-family: "Quicksand", sans-serif;
@@ -69,6 +68,7 @@ const StyledProfile = styled.div`
 
   .header{
     display:flex;
+    align-items: center;
   }
   .title{
     width:80%;
@@ -80,9 +80,6 @@ const StyledProfile = styled.div`
   .container{
     border-bottom: 1px solid black;
     margin:2%;
-    
-    
-    
   }
 
   .details-container{
@@ -101,13 +98,12 @@ const StyledProfile = styled.div`
   .post-btn{
 
     button {
-    width: 100%;
+    width: 120%;
     background-color: #2b85a2;
     color: white;
     padding: 10px 10px;
-    margin: 2%;
-    margin-top: 22%;
-    margin-left:10%;
+    position: relative;
+    right: 25%;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -147,9 +143,11 @@ const Profile = () => {
   const { user, usersConcerns } = useSelector((state) => state);
   console.log(user);
 
+
+
   useEffect(() => {
     dispatch(userConcerns(user.id));
-  }, [user.id]);
+  }, []);
   console.log(usersConcerns);
   return (
     <ProfileContainer>
