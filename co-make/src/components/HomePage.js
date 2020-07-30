@@ -15,6 +15,7 @@ const UpVotes = styled.div`
   width: 10%;
   display: flex;
   align-items: center;
+  margin: 4%;
   .upvote {
     margin-left: 3%;
     &:hover {
@@ -26,20 +27,20 @@ const StyledIssue = styled.div`
   background-color: #e5ebed;
   display: flex;
   flex-direction: column-reverse;
-  width: 45%;
+  width: 540px;
   margin: 0 auto;
-  padding: 2%;
+  padding: 0;
   margin-top: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  @media ${device.tablet} {
-    margin: 0%;
-    margin-top: 30px;
-  }
+  // @media ${device.tablet} {
+  //   margin: 0%;
+  //   margin-top: 30px;
+  // }
 
-  @media ${device.mobileM} {
-    margin-top: 20px;
-  }
+  // @media ${device.mobileM} {
+  //   margin-top: 20px;
+  // }
   &:hover {
     transition: 0.4s;
     box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2),
@@ -49,7 +50,18 @@ const StyledIssue = styled.div`
     min-width: 20%;
     text-align: left;
     img {
-      width: 25%;
+      max-width: 540px;
+      max-height:810px;
+      margin: 0 auto;
+      padding:0;
+    }
+
+    h2{
+      margin:4%;
+    }
+
+    p{
+      margin:4%;
     }
   }
 `;
@@ -85,6 +97,11 @@ const SearchIcon = styled(FontAwesomeIcon)`
   @media ${device.mobileL} {
     right: 27%;
   }
+`;
+
+const ImgCont = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const HomePage = () => {
@@ -147,7 +164,9 @@ const HomePage = () => {
             <div>
               <h2>{concern.title}</h2>
               {concern.imageURL && (
-                <img src={concern.imageURL} alt="issue pic in comment"></img>
+                <ImgCont>
+                  <img src={concern.imageURL} alt="issue pic in comment"></img>
+                </ImgCont>
               )}
               <p>{concern.description}</p>
               <p>{concern.zip}</p>
