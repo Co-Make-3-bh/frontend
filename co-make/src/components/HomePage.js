@@ -20,6 +20,20 @@ h1{
   font-size: 3rem;
 }
 
+.icon-text{
+  position: fixed;
+  top: 32px;
+  right: 45%;
+  left:0;
+  font-size: 1.1rem;
+  color:black;
+  &:hover {
+        transition: 0.7s;
+        color: white;
+      }
+
+}
+
 `;
 
 const UpVotes = styled.div`
@@ -86,6 +100,7 @@ const StyledIssue = styled.div`
       margin:4%;
     }
   }
+
 `;
 
 const Search = styled.input`
@@ -108,7 +123,7 @@ const Search = styled.input`
 
 
 const Form = styled.form`
-  width:40%;
+  width:30%;
   display: flex;
   align-items: center;
   justify-content:center;
@@ -137,7 +152,6 @@ const NewIssue = styled(FontAwesomeIcon)`
       }
 
 
-  
 `;
 
 const ImgCont = styled.div`
@@ -168,9 +182,14 @@ const HomePage = () => {
 
   return (
     <HomePageStyles>
+       
+        <div>
+        <p className = 'icon-text'>Post New Issue</p>
+    <Link to ='/postissue'>  <NewIssue icon ={faPenSquare}> </NewIssue></Link>
+    </div>
       <h1>C0MMUNITY ISSUES</h1>
       <div className ='form-container'>
-       <Link to ='/postissue'> <NewIssue icon ={faPenSquare}/></Link>
+   
       <Form onSubmit={handleSearch}>
      
         <Search
