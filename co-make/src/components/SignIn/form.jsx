@@ -48,8 +48,8 @@ const StyledForm = styled.div`
 
   align-items: center;
 
-  @media (max-width: 1000px){
-    width:45%;
+  @media (max-width: 1000px) {
+    width: 45%;
   }
 
   form {
@@ -133,8 +133,7 @@ const Form = (props) => {
     registerSchema
       .validate(formValues, { abortEarly: false })
       .then((_) => {
-        dispatch(loginUser(formValues));
-        push("/home");
+        dispatch(loginUser(formValues, props));
       })
       .catch((err) => {
         console.dir(err);

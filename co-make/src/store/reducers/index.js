@@ -137,6 +137,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         isAdding: false,
         message: "Concern successfully added!",
+        usersConcerns: [...state.usersConcerns, action.payload],
       };
     case ADD_CONCERN_FAILURE:
       return {

@@ -6,10 +6,9 @@ import styled from "styled-components";
 
 import { fetchConcerns, addUpvote, zipSearch } from "../store/actions";
 
-
 const HomePageStyles = styled.div`
   font-family: "Quicksand", sans-serif;
-`
+`;
 
 const UpVotes = styled.div`
   width: 10%;
@@ -25,19 +24,24 @@ const UpVotes = styled.div`
 const StyledIssue = styled.div`
   background-color: #e5ebed;
   display: flex;
+  flex-direction: column-reverse;
   width: 45%;
   margin: 0 auto;
   padding: 2%;
   margin-top: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  &:hover{
-    transition: .4s;
-    box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  &:hover {
+    transition: 0.4s;
+    box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-  div{
+  div {
     min-width: 20%;
     text-align: left;
+    img {
+      width: 20rem;
+    }
   }
 `;
 
@@ -49,9 +53,10 @@ const Search = styled.input`
   margin: 0 auto;
   outline: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  &:hover{
-    transition: .4s;
-    box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  &:hover {
+    transition: 0.4s;
+    box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 `;
 
@@ -73,8 +78,7 @@ const HomePage = () => {
   const { concerns } = useSelector((state) => state);
   const { user, userLikes } = useSelector((state) => state);
   // console.log(user);
-  console.log(userLikes);
-  console.log(concerns);
+
   useEffect(() => {
     dispatch(fetchConcerns());
   }, []);
@@ -102,6 +106,7 @@ const HomePage = () => {
         ></Search>
         <SearchIcon onClick={handleSearch} icon={faSearch} />
       </Form>
+      {concerns.length === 0 && <h1>No issues in your area. Try another zip code.</h1>}
       {concerns.map((concern) => {
         return (
           <StyledIssue key={concern.id}>
@@ -124,6 +129,9 @@ const HomePage = () => {
             </UpVotes>
             <div>
               <h2>{concern.title}</h2>
+              {concern.imageURL && (
+                <img src={concern.imageURL} alt="issue pic in comment"></img>
+              )}
               <p>{concern.description}</p>
               <p>{concern.zip}</p>
             </div>

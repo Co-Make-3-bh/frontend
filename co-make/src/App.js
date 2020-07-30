@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Form from "./components/SignIn/form.jsx";
-import Users from "./components/SignIn/users.jsx";
+
 import IssueForm from "./components/PostIssue/issueForm.jsx";
-import Issues from "./components/PostIssue/issues";
+
 import Issue from "./components/PostIssue/issue";
 import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
@@ -11,6 +11,7 @@ import { Route, Switch, Link, useHistory } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp/SignUp";
 import styled from "styled-components";
+import TokenDecoder from "./components/TokenDecoder";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -38,7 +39,7 @@ const StyledNav = styled.nav`
       font-size: 1.2rem;
 
       &:hover {
-        transition: .7s;
+        transition: 0.7s;
         color: black;
       }
     }
@@ -46,9 +47,6 @@ const StyledNav = styled.nav`
 `;
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [issues, setIssues] = useState([]);
-
   const { push } = useHistory();
   const handleSignOut = () => {
     push("/");
@@ -56,6 +54,7 @@ function App() {
   };
   return (
     <div className="App">
+      <TokenDecoder />
       <header>
         <StyledNav>
           <h1>Co-Make</h1>
@@ -80,23 +79,18 @@ function App() {
       </header>
 
       <Switch>
+        <PrivateRoute path="/home" component={HomePage} />
+        <PrivateRoute path="/profile" component={Profile} />
         <Route path="/issue/:id" component={Issue} />
         <Route path="/postissue">
-          <IssueForm setIssues={setIssues} issues={issues} />
-          <Issues issues={issues} />
+          <IssueForm />
         </Route>
         <Route path="/signup">
           <SignUp />
         </Route>
-        <Route path="/home" component={HomePage} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/">
-          <Form setUsers={setUsers} users={users} />
-          <Users users={users} />
-        </Route>
-        {/* <PrivateRoute path="/postissue" component={IssueForm} />
-        <PrivateRoute path="/home" component={HomePage} />
-        <PrivateRoute path="/profile" component={Profile} /> */}
+        {/* <Route path="/home" component={HomePage} />
+        <Route path="/profile" component={Profile} /> */}
+        <Route path="/" component={Form} />
       </Switch>
     </div>
   );
