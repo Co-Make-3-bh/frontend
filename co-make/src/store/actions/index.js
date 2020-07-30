@@ -123,16 +123,23 @@ export const logoutUser = (dispatch) => {
   });
 };
 
-export const registerUser = (user) => (dispatch) => {
+export const registerUser = (user, push) => (dispatch) => {
   dispatch({ type: REGISTER_USER_START });
   axiosWithAuth()
     .post("/auth/register", user)
     .then((res) => {
       dispatch({ type: REGISTER_USER_SUCCESS, payload: res.data.data });
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("id", res.data.data.id);
+      localStorage.setItem("username", res.data.data.username);
+      localStorage.setItem("email", res.data.data.email);
+      localStorage.setItem("zip", res.data.data.zip);
+      localStorage.setItem("userLikes", JSON.stringify([]));
+      push("/home");
     })
     .catch((err) => {
       dispatch({ type: REGISTER_USER_FAILURE });
+      console.log(err);
     });
 };
 
