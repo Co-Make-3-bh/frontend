@@ -37,7 +37,7 @@ const FormContainer = styled.div`
 `;
 const StyledForm = styled.div`
   background-color: #e5ebed;
-  width: 50%;
+  width: 45%;
   height: auto;
   padding: 2%;
   margin-top: 5%;
@@ -79,7 +79,7 @@ const StyledFormInput = styled.div`
 
   h2 {
     text-align: left;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-bottom: 8%;
     margin-top: 10%;
     font-family: "Quicksand", sans-serif;
@@ -95,7 +95,7 @@ const StyledFormInput = styled.div`
 
   input {
     width: 95%;
-    padding: 20px 20px;
+    padding: 10px 10px;
     margin: 2%;
     margin-bottom: 8%;
     border: 1px solid #ccc;
