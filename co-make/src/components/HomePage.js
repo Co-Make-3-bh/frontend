@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { faAngleUp, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faAngleUp, faSearch, faPenSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
@@ -9,7 +10,16 @@ import { device } from "../utils/device";
 
 const HomePageStyles = styled.div`
   font-family: "Quicksand", sans-serif;
-  margin-top: 200px;
+  margin-top:10%;
+  .form-container{
+    display: flex;
+    justify-content:center;
+}
+ 
+h1{
+  font-size: 3rem;
+}
+
 `;
 
 const UpVotes = styled.div`
@@ -17,8 +27,18 @@ const UpVotes = styled.div`
   display: flex;
   align-items: center;
   margin: 4%;
+  color:#7f8385;
+  
   .upvote {
-    margin-left: 3%;
+    margin-right: 3%;
+    background-color:black;
+    border-radius: 5px;
+    color:white;
+    font-size: 1.2rem;
+    padding: 4%;
+    width:20px;
+    height: 20px;
+
     &:hover {
       cursor: pointer;
     }
@@ -26,13 +46,10 @@ const UpVotes = styled.div`
 `;
 const StyledIssue = styled.div`
   background-color: #e5ebed;
-  z-index: -1;
   display: flex;
   flex-direction: column-reverse;
-  position: relative;
   width: 540px;
   margin: 0 auto;
-  top: 20%;
   padding: 0;
   margin-top: 30px;
   border-radius: 10px;
@@ -71,14 +88,16 @@ const StyledIssue = styled.div`
 `;
 
 const Search = styled.input`
-  width: 50%;
+  width: 100%;
   border-radius: 20px;
   border: none;
   padding: 0.7%;
   margin: 0 auto;
   outline: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
+  box-sizing:border-box;
+  
+  
   &:hover {
     transition: 0.4s;
     box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2),
@@ -86,35 +105,44 @@ const Search = styled.input`
   }
 `;
 
+
 const Form = styled.form`
-  width: 100%;
+  width:40%;
   display: flex;
   align-items: center;
+  justify-content:center;
+  position: fixed;
+  top: 45px;
+ 
+ 
 `;
 
 const SearchIcon = styled(FontAwesomeIcon)`
   position: relative;
-  right: 26%;
+  right: 5%;
+  width:50%;
+`;
+
+const NewIssue = styled(FontAwesomeIcon)`
+  position: fixed;
+  top: 40px;
+  right: 0;
+  left:22%;
+  font-size: 2.5rem;
+  color:black;
+  &:hover {
+        transition: 0.7s;
+        color: white;
+      }
+
+
+  
 `;
 
 const ImgCont = styled.div`
   display: flex;
   justify-content: center;
 `;
-
-const StickySearch = styled.div`
-  position: fixed;
-  top: 116px;
-  width: 100%;
-  background-color: #2b85a2;
-  height: 200px;
-`;
-
-const Wrapper = styled.div`
-  position: relative;
-  top: 150px;
-  margin-bottom: 2%;
-`
 
 const HomePage = () => {
   const [searchBy, setSearchBy] = useState("");
@@ -139,63 +167,60 @@ const HomePage = () => {
 
   return (
     <HomePageStyles>
-      <StickySearch>
-        <h1>Community Issues</h1>
-        <Form onSubmit={handleSearch}>
-          <Search
-            type="text"
-            name="search"
-            value={searchBy}
-            placeholder="Enter zip code"
-            onChange={handleChange}
-          ></Search>
-          <SearchIcon onClick={handleSearch} icon={faSearch} />
-        </Form>
-      </StickySearch>
-      <Wrapper>
-        {concerns.length === 0 && !isFetching && (
-          <h1>No issues in your area. Try another zip code.</h1>
-        )}
-        {isFetching && <h1>Loading...</h1>}
-        {concerns.map((concern) => {
-          return (
-            <StyledIssue key={concern.id}>
-              <UpVotes>
-                <p>{concern.upvotes}</p>
-                <FontAwesomeIcon
-                  className="upvote"
-                  onClick={() => {
-                    console.log("Homepage 96", concern.id);
-                    if (userLikes.length) {
-                      if (
-                        !userLikes.some((el) => el.concern_id === concern.id)
-                      ) {
-                        dispatch(addUpvote(user.id, concern.id));
-                      }
-                    } else {
+      <h1>C0MMUNITY ISSUES</h1>
+      <div className ='form-container'>
+       <Link to ='/postissue'> <NewIssue icon ={faPenSquare}/></Link>
+      <Form onSubmit={handleSearch}>
+     
+        <Search
+          type="text"
+          name="search"
+          value={searchBy}
+          placeholder="Enter zip code"
+          onChange={handleChange}
+        ></Search>
+        <SearchIcon onClick={handleSearch} icon={faSearch} />
+      
+      </Form>
+      </div>
+      {concerns.length === 0 && !isFetching && (
+        <h1>No issues in your area. Try another zip code.</h1>
+      )}
+      {isFetching && <h1>Loading...</h1>}
+      {concerns.map((concern) => {
+        return (
+          <StyledIssue key={concern.id}>
+            <UpVotes>
+            <FontAwesomeIcon
+                className="upvote"
+                onClick={() => {
+                  console.log("Homepage 96", concern.id);
+                  if (userLikes.length) {
+                    if (!userLikes.some((el) => el.concern_id === concern.id)) {
                       dispatch(addUpvote(user.id, concern.id));
                     }
-                  }}
-                  icon={faAngleUp}
-                />
-              </UpVotes>
-              <div>
-                <h2>{concern.title}</h2>
-                {concern.imageURL && (
-                  <ImgCont>
-                    <img
-                      src={concern.imageURL}
-                      alt="issue pic in comment"
-                    ></img>
-                  </ImgCont>
-                )}
-                <p>{concern.description}</p>
-                <p>{concern.zip}</p>
-              </div>
-            </StyledIssue>
-          );
-        })}
-      </Wrapper>
+                  } else {
+                    dispatch(addUpvote(user.id, concern.id));
+                  }
+                }}
+                icon={faAngleUp}
+              />
+              <p>{concern.upvotes}</p>
+              
+            </UpVotes>
+            <div>
+              <h2>{concern.title}</h2>
+              {concern.imageURL && (
+                <ImgCont>
+                  <img src={concern.imageURL} alt="issue pic in comment"></img>
+                </ImgCont>
+              )}
+              <p>{concern.description}</p>
+              <p>{concern.zip}</p>
+            </div>
+          </StyledIssue>
+        );
+      })}
     </HomePageStyles>
   );
 };

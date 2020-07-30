@@ -7,6 +7,7 @@ import styled from "styled-components";
 const FormContainer = styled.div`
   width: 40%;
   margin: 0 auto;
+ 
   background-color: #e5ebed;
   border-radius: 20px;
   font-family: "Quicksand", sans-serif;
@@ -14,6 +15,7 @@ const FormContainer = styled.div`
 `;
 
 const StyledForm = styled.form`
+
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -42,6 +44,7 @@ const StyledForm = styled.form`
 const StyledDetailsCon = styled.div`
   width: 40%;
   margin: 0 auto;
+  margin-top:10%;
   padding: 30px;
   background-color: #e5ebed;
   border-radius: 20px;
