@@ -7,7 +7,7 @@ import styled from "styled-components";
 const FormContainer = styled.div`
   width: 40%;
   margin: 0 auto;
- 
+  margin-top: 10%;
   background-color: #e5ebed;
   border-radius: 20px;
   font-family: "Quicksand", sans-serif;
@@ -15,7 +15,6 @@ const FormContainer = styled.div`
 `;
 
 const StyledForm = styled.form`
-
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -44,7 +43,8 @@ const StyledForm = styled.form`
 const StyledDetailsCon = styled.div`
   width: 40%;
   margin: 0 auto;
-  margin-top:10%;
+  margin-top: 10%;
+  margin-bottom: 5%;
   padding: 30px;
   background-color: #e5ebed;
   border-radius: 20px;
@@ -137,7 +137,9 @@ const Issue = (props) => {
         <p>Title: {state.title}</p>
         <p>Description: {state.description}</p>
         {/* <p>Created By: {state.username}</p> */}
-        <img src={state.imageURL} alt="issue for community"></img>
+        {state.imageURL && (
+          <img src={state.imageURL} alt="issue for community"></img>
+        )}
         <p>Zip Code: {state.zip}</p>
         <div className="buttonDiv">
           <button onClick={handleDelete}>Delete</button>
