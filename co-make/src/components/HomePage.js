@@ -70,6 +70,7 @@ const StyledIssue = styled.div`
   div {
     min-width: 20%;
     text-align: left;
+    word-wrap:break-word;
     img {
       max-width: 540px;
       max-height:810px;
