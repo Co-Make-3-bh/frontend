@@ -117,14 +117,10 @@ const Form = (props) => {
   const [errors, setErrors] = useState([]);
 
   const handleChange = (e) => {
-    console.dir(e.target);
-
     setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
     });
-
-    console.log(formValues);
   };
 
   const handleSubmit = (e) => {
@@ -136,8 +132,6 @@ const Form = (props) => {
         dispatch(loginUser(formValues, props));
       })
       .catch((err) => {
-        console.dir(err);
-
         setErrors([...err.inner]);
       });
   };
