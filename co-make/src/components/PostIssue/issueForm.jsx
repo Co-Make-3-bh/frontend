@@ -200,11 +200,7 @@ const IssueForm = (props) => {
   return (
     <CloudinaryContext cloudName="co-make-test">
       <FormContainer>
-        <div className="error-output">
-          {errors.map((err) => (
-            <p style={{ color: "red" }}>{err.message}</p>
-          ))}
-        </div>
+       
         <StyledForm>
           <form>
             <StyledFormInput>
@@ -276,6 +272,12 @@ const IssueForm = (props) => {
           </section>
 
           <button onClick={() => beginUpload()}>Upload Image</button> */}
+
+<div className="error-output">
+          {errors.map((err) => (
+            <p style={{ color: "red" }}>{err.message}</p>
+          ))}
+        </div>
           <button data-cy="submit-button" onClick={handleSubmit}>
             Post New Issue
           </button>

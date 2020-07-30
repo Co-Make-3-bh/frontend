@@ -14,6 +14,7 @@ const UpVotes = styled.div`
   width: 10%;
   display: flex;
   align-items: center;
+  margin:4%;
   .upvote {
     margin-left: 3%;
     &:hover {
@@ -25,9 +26,9 @@ const StyledIssue = styled.div`
   background-color: #e5ebed;
   display: flex;
   flex-direction: column-reverse;
-  width: 45%;
+  width: 540px;
   margin: 0 auto;
-  padding: 2%;
+  padding: 0;
   margin-top: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -40,7 +41,18 @@ const StyledIssue = styled.div`
     min-width: 20%;
     text-align: left;
     img {
-      width: 20rem;
+      width: 540px;
+      max-height:810px;
+      margin:0;
+      padding:0;
+    }
+
+    h2{
+      margin:4%;
+    }
+
+    p{
+      margin:4%;
     }
   }
 `;
