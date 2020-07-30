@@ -89,14 +89,7 @@ const Form = styled.form`
 
 const SearchIcon = styled(FontAwesomeIcon)`
   position: relative;
-  right: 25.5%;
-  @media ${device.tablet} {
-    right: 27%;
-  }
-
-  @media ${device.mobileL} {
-    right: 27%;
-  }
+  right: 26%;
 `;
 
 const ImgCont = styled.div`
@@ -108,7 +101,7 @@ const HomePage = () => {
   const [searchBy, setSearchBy] = useState("");
   const dispatch = useDispatch();
   const { concerns } = useSelector((state) => state);
-  const { user, userLikes } = useSelector((state) => state);
+  const { user, userLikes, isFetching } = useSelector((state) => state);
   // console.log(user);
 
   useEffect(() => {
@@ -138,9 +131,10 @@ const HomePage = () => {
         ></Search>
         <SearchIcon onClick={handleSearch} icon={faSearch} />
       </Form>
-      {concerns.length === 0 && (
+      {concerns.length === 0 && !isFetching && (
         <h1>No issues in your area. Try another zip code.</h1>
       )}
+      {isFetching && <h1>Loading...</h1>}
       {concerns.map((concern) => {
         return (
           <StyledIssue key={concern.id}>
