@@ -88,10 +88,27 @@ export const loginUser = (credentials) => (dispatch) => {
       dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data });
       console.log("Login", res.data);
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("id", res.data.data.id);
+      localStorage.setItem("username", res.data.data.username);
+      localStorage.setItem("email", res.data.data.email);
+      localStorage.setItem("zip", res.data.data.zip);
     })
     .catch((err) => {
       dispatch({ type: LOGIN_USER_FAILURE });
     });
+};
+
+export const refreshPage = (dispatch) => {
+  const data = {
+    data: {
+      email: localStorage.getItem("email"),
+      username: localStorage.getItem("username"),
+      id: localStorage.getItem("id"),
+      zip: localStorage.getItem("zip"),
+    },
+  };
+  dispatch({ type: LOGIN_USER_START });
+  dispatch({ type: LOGIN_USER_SUCCESS, payload: data });
 };
 
 export const logoutUser = (dispatch) => {
@@ -121,7 +138,11 @@ export const addConcern = (concern) => (dispatch) => {
   axiosWithAuth()
     .post("/concerns", concern)
     .then((res) => {
-      dispatch({ type: ADD_CONCERN_SUCCESS });
+      dispatch({
+        type: ADD_CONCERN_SUCCESS,
+        payload: JSON.parse(res.config.data),
+      });
+      console.log(res);
     })
     .catch((err) => {
       dispatch({ type: ADD_CONCERN_FAILURE });
@@ -137,23 +158,25 @@ export const editConcern = (concern, id) => (dispatch) => {
         type: EDIT_CONCERN_SUCCESS,
         payload: JSON.parse(res.config.data),
       });
-      console.log(JSON.parse(res.config.data));
     })
     .catch((err) => {
       dispatch({ type: EDIT_CONCERN_FAILURE });
-      console.log(err);
     });
 };
 
-export const deleteConcern = (id) => (dispatch) => {
+export const deleteConcern = (userId, id) => (dispatch) => {
   dispatch({ type: DELETE_CONCERN_START });
   axiosWithAuth()
     .delete(`/concerns/${id}`)
     .then((res) => {
+      console.log(res);
       dispatch({ type: DELETE_CONCERN_SUCCESS, payload: id });
     })
     .catch((err) => {
       dispatch({ type: DELETE_CONCERN_FAILURE });
+    })
+    .finally(() => {
+      userConcerns(userId);
     });
 };
 

@@ -119,7 +119,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(userConcerns(user.id));
-  }, []);
+  }, [user.id]);
   console.log(usersConcerns);
   return (
     <FormContainer>

@@ -11,6 +11,7 @@ import { Route, Switch, Link, useHistory } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp/SignUp";
 import styled from "styled-components";
+import TokenDecoder from "./components/TokenDecoder";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -56,6 +57,7 @@ function App() {
   };
   return (
     <div className="App">
+      <TokenDecoder />
       <header>
         <StyledNav>
           <h1>Co-Make</h1>
