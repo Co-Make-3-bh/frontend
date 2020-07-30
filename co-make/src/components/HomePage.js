@@ -113,6 +113,7 @@ const StickySearch = styled.div`
 const Wrapper = styled.div`
   position: relative;
   top: 150px;
+  margin-bottom: 2%;
 `
 
 const HomePage = () => {
