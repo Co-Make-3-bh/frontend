@@ -27,13 +27,50 @@ h1{
   left:0;
   font-size: 1.1rem;
   color:black;
+  margin-left:0;
   &:hover {
         transition: 0.7s;
         color: white;
       }
 
+      @media (max-width:1280px){
+        font-size:1rem;
+        left:2%;
+      }
+
+      @media (max-width:1024px){
+    left:12%;
+  }
+
 }
 
+`;
+
+
+const NewIssue = styled(FontAwesomeIcon)`
+  position: fixed;
+  top: 40px;
+  right: 0;
+  left:22%;
+  font-size: 2.5rem;
+  color:black;
+  &:hover {
+        transition: 0.7s;
+        color: white;
+      }
+
+  @media (max-width: 1440px){
+    left:20%;
+    
+  }
+  @media (max-width:1280px){
+      font-size:2.3rem;
+      left:21%;
+
+    }
+  @media(max-width:1024px){
+    left:23%;
+  }
 `;
 
 const UpVotes = styled.div`
@@ -129,6 +166,11 @@ const Form = styled.form`
   justify-content:center;
   position: fixed;
   top: 45px;
+
+  @media (max-width:1024px){
+    top: 150px;
+    width:50%;
+  }
  
  
 `;
@@ -139,20 +181,6 @@ const SearchIcon = styled(FontAwesomeIcon)`
   width:50%;
 `;
 
-const NewIssue = styled(FontAwesomeIcon)`
-  position: fixed;
-  top: 40px;
-  right: 0;
-  left:22%;
-  font-size: 2.5rem;
-  color:black;
-  &:hover {
-        transition: 0.7s;
-        color: white;
-      }
-
-
-`;
 
 const ImgCont = styled.div`
   display: flex;
