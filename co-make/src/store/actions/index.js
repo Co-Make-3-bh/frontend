@@ -79,7 +79,7 @@ export const fetchConcern = (createdBy, concernID) => (dispatch) => {
     });
 };
 
-export const loginUser = (credentials) => (dispatch) => {
+export const loginUser = (credentials, props) => (dispatch) => {
   dispatch({ type: LOGIN_USER_START });
   console.log(credentials);
   axiosWithAuth()
@@ -92,6 +92,8 @@ export const loginUser = (credentials) => (dispatch) => {
       localStorage.setItem("username", res.data.data.username);
       localStorage.setItem("email", res.data.data.email);
       localStorage.setItem("zip", res.data.data.zip);
+      localStorage.setItem("userLikes", JSON.stringify(res.data.liked));
+      props.history.push("/home");
     })
     .catch((err) => {
       dispatch({ type: LOGIN_USER_FAILURE });
@@ -106,6 +108,7 @@ export const refreshPage = (dispatch) => {
       id: localStorage.getItem("id"),
       zip: localStorage.getItem("zip"),
     },
+    liked: JSON.parse(localStorage.getItem("userLikes")),
   };
   dispatch({ type: LOGIN_USER_START });
   dispatch({ type: LOGIN_USER_SUCCESS, payload: data });
