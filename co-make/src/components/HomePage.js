@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { faAngleUp, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faAngleUp, faSearch, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
@@ -9,7 +10,16 @@ import { device } from "../utils/device";
 
 const HomePageStyles = styled.div`
   font-family: "Quicksand", sans-serif;
-  margin-top:200px;
+  margin-top:10%;
+  .form-container{
+    display: flex;
+    justify-content:center;
+}
+ 
+h1{
+  
+}
+
 `;
 
 const UpVotes = styled.div`
@@ -68,13 +78,15 @@ const StyledIssue = styled.div`
 `;
 
 const Search = styled.input`
-  width: 50%;
+  width: 100%;
   border-radius: 20px;
   border: none;
   padding: 0.7%;
   margin: 0 auto;
   outline: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-sizing:border-box;
+  
   
   &:hover {
     transition: 0.4s;
@@ -83,15 +95,31 @@ const Search = styled.input`
   }
 `;
 
+
 const Form = styled.form`
-  width: 100%;
+  width:40%;
   display: flex;
   align-items: center;
+  justify-content:center;
+  position: fixed;
+  top: 45px;
+ 
+ 
 `;
 
 const SearchIcon = styled(FontAwesomeIcon)`
   position: relative;
-  right: 26%;
+  right: 5%;
+  width:50%;
+`;
+
+const NewIssue = styled(FontAwesomeIcon)`
+  position: fixed;
+  top: 50px;
+  right: 0;
+  left:20%;
+ 
+  width:100%;
 `;
 
 const ImgCont = styled.div`
@@ -122,8 +150,11 @@ const HomePage = () => {
 
   return (
     <HomePageStyles>
-      <h1>Community Issues</h1>
+      <h1>C0MMUNITY ISSUES</h1>
+      <div className ='form-container'>
+       <Link> <NewIssue icon ={faPen}/></Link>
       <Form onSubmit={handleSearch}>
+     
         <Search
           type="text"
           name="search"
@@ -132,7 +163,9 @@ const HomePage = () => {
           onChange={handleChange}
         ></Search>
         <SearchIcon onClick={handleSearch} icon={faSearch} />
+      
       </Form>
+      </div>
       {concerns.length === 0 && !isFetching && (
         <h1>No issues in your area. Try another zip code.</h1>
       )}
