@@ -6,26 +6,9 @@ import { registerUser } from "../../store/actions";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-const StyledText = styled.p`
-  p {
-    color: #c6d7dd;
-    margin-top: 2%;
-    font-size: 1rem;
-    font-family: "Quicksand", sans-serif;
-  }
-
-  .link {
-    text-decoration: none;
-    color: white;
-
-    &:hover {
-      color: black;
-    }
-  }
-`;
-
 const StyledForm = styled.form`
   width: 25%;
+  min-width: 350px;
   height: 580px;
   display: flex;
   flex-direction: column;
@@ -114,7 +97,7 @@ function SignUp(props) {
     setUserValues(initialFormValues);
   };
   return (
-    <StyledText>
+    <div>
       <StyledForm>
         <div>
           <h2>Sign Up</h2>
@@ -165,7 +148,7 @@ function SignUp(props) {
           Sign In
         </Link>
       </p>
-    </StyledText>
+    </div>
   );
 }
 export default SignUp;
