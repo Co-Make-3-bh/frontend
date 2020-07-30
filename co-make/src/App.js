@@ -21,6 +21,7 @@ const StyledNav = styled.nav`
   font-family: "Quicksand", sans-serif;
   border-bottom: 1px solid #9fb3b5;
   width:100%;
+  background-color:#2B85A2;
   position: fixed;
   top: 0;
  
