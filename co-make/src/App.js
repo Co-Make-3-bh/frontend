@@ -13,11 +13,18 @@ import SignUp from "./components/SignUp/SignUp";
 import styled from "styled-components";
 import TokenDecoder from "./components/TokenDecoder";
 
+
 const StyledNav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-family: "Quicksand", sans-serif;
+  border-bottom: 1px solid #9fb3b5;
+  width:100%;
+  position: fixed;
+  top: 0;
+ 
+
   h1 {
     margin: 10px;
     font-size: 2.5rem;
@@ -56,8 +63,11 @@ function App() {
     <div className="App">
       <TokenDecoder />
       <header>
+
+       
         <StyledNav>
           <h1>Co-Make</h1>
+          
           <div className="linkDiv">
             <Link className="link" to="/profile">
               Profile

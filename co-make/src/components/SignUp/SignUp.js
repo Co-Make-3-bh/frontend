@@ -31,7 +31,7 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-top: 28px;
+  margin-top: 10%;
   background-color: #e5ebed;
   padding: 30px;
   border-radius: 20px;

@@ -11,6 +11,7 @@ const ProfileContainer = styled.div`
   align-items: center;
   width: 100%;
   text-decoration: none;
+ 
 
   h1 {
     font-family: "Quicksand", sans-serif;
@@ -56,7 +57,7 @@ const StyledProfile = styled.div`
   width: 50%;
   height: auto;
   padding: 2%;
-  margin-top: 2%;
+  margin-top: 10%;
   margin-bottom:2%;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
