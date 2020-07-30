@@ -27,8 +27,17 @@ const UpVotes = styled.div`
   display: flex;
   align-items: center;
   margin: 4%;
+  
   .upvote {
     margin-left: 3%;
+    background-color:black;
+    border-radius: 5px;
+    color:white;
+    font-size: 1.2rem;
+    padding: 4%;
+    width:20px;
+    height: 20px;
+
     &:hover {
       cursor: pointer;
     }
@@ -120,6 +129,10 @@ const NewIssue = styled(FontAwesomeIcon)`
   left:22%;
   font-size: 2.5rem;
   color:black;
+  &:hover {
+        transition: 0.7s;
+        color: white;
+      }
 
 
   
