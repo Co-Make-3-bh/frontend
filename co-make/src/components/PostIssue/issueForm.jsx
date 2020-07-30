@@ -16,7 +16,7 @@ const FormContainer = styled.div`
   align-items: center;
   width: 100%;
   text-decoration: none;
-  margin-bottom: 5%;
+  margin: 8% 0 5% 0;
 
   p {
     color: #c6d7dd;

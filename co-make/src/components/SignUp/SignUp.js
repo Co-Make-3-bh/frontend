@@ -7,22 +7,22 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
-p {
-  color: #c6d7dd;
-  margin-top: 2%;
-  font-size: 1rem;
-  font-family: "Quicksand", sans-serif;
-}
-
-.link {
-  text-decoration: none;
-  color: white;
-
-  &:hover {
-    color: black;
+  p {
+    color: #c6d7dd;
+    margin-top: 2%;
+    font-size: 1rem;
+    font-family: "Quicksand", sans-serif;
   }
-}
-`
+
+  .link {
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+      color: black;
+    }
+  }
+`;
 
 const StyledForm = styled.form`
   width: 25%;
@@ -71,8 +71,7 @@ const StyledForm = styled.form`
 
 function SignUp(props) {
   const { push } = useHistory();
-  console.log(push);
-  
+
   const dispatch = useDispatch();
   const initialFormValues = {
     username: "",

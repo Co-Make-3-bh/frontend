@@ -9,7 +9,7 @@ import { device } from "../utils/device";
 
 const HomePageStyles = styled.div`
   font-family: "Quicksand", sans-serif;
-  margin-top:200px;
+  margin-top: 200px;
 `;
 
 const UpVotes = styled.div`
@@ -26,10 +26,13 @@ const UpVotes = styled.div`
 `;
 const StyledIssue = styled.div`
   background-color: #e5ebed;
+  z-index: -1;
   display: flex;
   flex-direction: column-reverse;
+  position: relative;
   width: 540px;
   margin: 0 auto;
+  top: 20%;
   padding: 0;
   margin-top: 30px;
   border-radius: 10px;
@@ -75,7 +78,7 @@ const Search = styled.input`
   margin: 0 auto;
   outline: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  
+
   &:hover {
     transition: 0.4s;
     box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2),
@@ -98,6 +101,20 @@ const ImgCont = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+const StickySearch = styled.div`
+  position: fixed;
+  top: 116px;
+  width: 100%;
+  background-color: #2b85a2;
+  height: 200px;
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  top: 150px;
+  margin-bottom: 2%;
+`
 
 const HomePage = () => {
   const [searchBy, setSearchBy] = useState("");
@@ -122,54 +139,63 @@ const HomePage = () => {
 
   return (
     <HomePageStyles>
-      <h1>Community Issues</h1>
-      <Form onSubmit={handleSearch}>
-        <Search
-          type="text"
-          name="search"
-          value={searchBy}
-          placeholder="Enter zip code"
-          onChange={handleChange}
-        ></Search>
-        <SearchIcon onClick={handleSearch} icon={faSearch} />
-      </Form>
-      {concerns.length === 0 && !isFetching && (
-        <h1>No issues in your area. Try another zip code.</h1>
-      )}
-      {isFetching && <h1>Loading...</h1>}
-      {concerns.map((concern) => {
-        return (
-          <StyledIssue key={concern.id}>
-            <UpVotes>
-              <p>{concern.upvotes}</p>
-              <FontAwesomeIcon
-                className="upvote"
-                onClick={() => {
-                  console.log("Homepage 96", concern.id);
-                  if (userLikes.length) {
-                    if (!userLikes.some((el) => el.concern_id === concern.id)) {
+      <StickySearch>
+        <h1>Community Issues</h1>
+        <Form onSubmit={handleSearch}>
+          <Search
+            type="text"
+            name="search"
+            value={searchBy}
+            placeholder="Enter zip code"
+            onChange={handleChange}
+          ></Search>
+          <SearchIcon onClick={handleSearch} icon={faSearch} />
+        </Form>
+      </StickySearch>
+      <Wrapper>
+        {concerns.length === 0 && !isFetching && (
+          <h1>No issues in your area. Try another zip code.</h1>
+        )}
+        {isFetching && <h1>Loading...</h1>}
+        {concerns.map((concern) => {
+          return (
+            <StyledIssue key={concern.id}>
+              <UpVotes>
+                <p>{concern.upvotes}</p>
+                <FontAwesomeIcon
+                  className="upvote"
+                  onClick={() => {
+                    console.log("Homepage 96", concern.id);
+                    if (userLikes.length) {
+                      if (
+                        !userLikes.some((el) => el.concern_id === concern.id)
+                      ) {
+                        dispatch(addUpvote(user.id, concern.id));
+                      }
+                    } else {
                       dispatch(addUpvote(user.id, concern.id));
                     }
-                  } else {
-                    dispatch(addUpvote(user.id, concern.id));
-                  }
-                }}
-                icon={faAngleUp}
-              />
-            </UpVotes>
-            <div>
-              <h2>{concern.title}</h2>
-              {concern.imageURL && (
-                <ImgCont>
-                  <img src={concern.imageURL} alt="issue pic in comment"></img>
-                </ImgCont>
-              )}
-              <p>{concern.description}</p>
-              <p>{concern.zip}</p>
-            </div>
-          </StyledIssue>
-        );
-      })}
+                  }}
+                  icon={faAngleUp}
+                />
+              </UpVotes>
+              <div>
+                <h2>{concern.title}</h2>
+                {concern.imageURL && (
+                  <ImgCont>
+                    <img
+                      src={concern.imageURL}
+                      alt="issue pic in comment"
+                    ></img>
+                  </ImgCont>
+                )}
+                <p>{concern.description}</p>
+                <p>{concern.zip}</p>
+              </div>
+            </StyledIssue>
+          );
+        })}
+      </Wrapper>
     </HomePageStyles>
   );
 };

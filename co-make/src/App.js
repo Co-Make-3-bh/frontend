@@ -92,10 +92,8 @@ function App() {
       <Switch>
         <PrivateRoute path="/home" component={HomePage} />
         <PrivateRoute path="/profile" component={Profile} />
-        <Route path="/issue/:id" component={Issue} />
-        <Route path="/postissue">
-          <IssueForm />
-        </Route>
+        <PrivateRoute path="/issue/:id" component={Issue} />
+        <PrivateRoute path="/postissue" component={IssueForm} />
         <Route path="/signup">
           <SignUp />
         </Route>

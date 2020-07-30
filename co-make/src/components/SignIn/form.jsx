@@ -105,7 +105,6 @@ const StyledFormInput = styled.div`
 `;
 
 const Form = (props) => {
-  const { push } = useHistory();
   const dispatch = useDispatch();
   const initialValues = {
     email: "",
@@ -138,8 +137,6 @@ const Form = (props) => {
 
   return (
     <FormContainer>
-      
-
       <StyledForm>
         <form>
           <StyledFormInput>
@@ -164,11 +161,11 @@ const Form = (props) => {
               value={formValues.password}
             />
 
-<div className="errors">
-        {errors.map((err) => (
-          <p style={{ color: "red" }}>{err.message}</p>
-        ))}
-      </div>
+            <div className="errors">
+              {errors.map((err) => (
+                <p style={{ color: "red" }}>{err.message}</p>
+              ))}
+            </div>
 
             <button data-cy="submit-button" onClick={handleSubmit}>
               Login
