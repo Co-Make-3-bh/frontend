@@ -68,7 +68,7 @@ const StyledIssue = styled.div`
 `;
 
 const Search = styled.input`
-  width: 40%;
+  width: 50%;
   border-radius: 20px;
   border: none;
   padding: 0.7%;
