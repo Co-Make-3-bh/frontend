@@ -12,6 +12,7 @@ import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp/SignUp";
 import styled from "styled-components";
 import TokenDecoder from "./components/TokenDecoder";
+import { device } from "./utils/device";
 
 
 const StyledNav = styled.nav`
@@ -24,6 +25,14 @@ const StyledNav = styled.nav`
   background-color:#2B85A2;
   position: fixed;
   top: 0;
+  
+  @media (max-width:1024px){
+    height:20%;
+    align-items: flex-start;
+    padding-top:2%;
+    
+    
+  }
  
 
   h1 {
@@ -32,13 +41,24 @@ const StyledNav = styled.nav`
     font-family: "Rock Salt", cursive;
     width: 20%;
 
-    @media (max-width: 1000px) {
-      width: 25%;
+    @media (max-width:1024px) {
+      width: 20%;
+      margin:0;
+      font-size: 2rem;
+     
     }
   }
   .linkDiv {
     margin: 10px;
     width: 35%;
+
+    
+
+    @media (max-width:1024px){
+      width:50%;
+      
+      margin-top:2%;
+    }
     
     .link {
       padding: 2%;
@@ -51,6 +71,11 @@ const StyledNav = styled.nav`
         transition: 0.7s;
         color: black;
       }
+
+      @media (max-width:1280px){
+      font-size:1rem;
+
+    }
     }
   }
 `;
