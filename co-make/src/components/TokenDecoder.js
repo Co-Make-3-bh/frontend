@@ -8,13 +8,13 @@ const TokenDecoder = () => {
   let token = jwt.decode(localStorage.getItem("token"));
 
   if (token) {
-    // if (token.exp * 1000 > Date.now()) {
-    //   console.log("log in is not expired");
-    //   dispatch(refreshPage());
-    // } else {
-    //   console.log("log in is expired");
-    //   localStorage.removeItem("token");
-    // }
+    if (token.exp * 1000 > Date.now()) {
+      console.log("log in is not expired");
+      dispatch(refreshPage);
+    } else {
+      console.log("log in is expired");
+      localStorage.removeItem("token");
+    }
     dispatch(refreshPage);
   } else {
     localStorage.removeItem("token");

@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { userConcerns } from "../store/actions";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Issue from "./PostIssue/issue";
 
 const ProfileContainer = styled.div`
   display: flex;
