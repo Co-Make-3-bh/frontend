@@ -8,6 +8,7 @@ import { fetchConcerns, addUpvote, zipSearch } from "../store/actions";
 
 const HomePageStyles = styled.div`
   font-family: "Quicksand", sans-serif;
+  margin-top:200px;
 `;
 
 const UpVotes = styled.div`
@@ -58,13 +59,14 @@ const StyledIssue = styled.div`
 `;
 
 const Search = styled.input`
-  width: 50%;
+  width: 40%;
   border-radius: 20px;
   border: none;
   padding: 0.5%;
   margin: 0 auto;
   outline: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
   &:hover {
     transition: 0.4s;
     box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2),
