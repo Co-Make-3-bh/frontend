@@ -134,6 +134,7 @@ const Issue = (props) => {
         <p>Title: {state.title}</p>
         <p>Description: {state.description}</p>
         {/* <p>Created By: {state.username}</p> */}
+        <img src={state.imageURL} alt="issue for community"></img>
         <p>Zip Code: {state.zip}</p>
         <div className="buttonDiv">
           <button onClick={handleDelete}>Delete</button>
